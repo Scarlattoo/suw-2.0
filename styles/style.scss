@@ -1,0 +1,160 @@
+$box-shadow-color:  rgba(0, 0, 0, 0.2);
+$text-color-to-dark-menu: white;
+
+html, body {
+    height: 100%;
+    margin: 0 auto;
+    width: 100%;
+    background: #CDE700;
+}
+
+.btn {
+    margin: 20px;
+}
+
+.main-content{
+    padding-top: 15px;
+}
+
+.text-center {
+    text-align: center;
+    align-items: center;
+    align-content: center;
+}
+
+.collapsible-menu {
+    padding: 0px 30px;
+    border-bottom: 3px solid #CDE700;
+    border-top: 3px solid green;
+    box-shadow: 1px 2px 3px $box-shadow-color;
+    color: $text-color-to-dark-menu;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0px;
+
+    .navbar-brand {
+        display: inline-block;
+        font-size: 42px;
+        padding: 10px;
+        text-decoration: none;
+        color: $text-color-to-dark-menu;
+    }
+}
+
+.hidden {
+    display: none;
+}
+
+td a {
+    display: block;
+}
+
+th a{
+    display: block;
+    color: black;
+}
+
+.cbalink {
+    display: none;
+}
+
+/*SMARTFON*/
+@media (max-width: 991px) {
+    /* style tylko dla ekranów o szerokości nie większej niż 767px - typowe smartfony */
+    
+    .mobile {
+        display: block;
+    }
+
+    .mobile-active {
+        text-shadow: 0px 2px 5px rgb(255, 254, 254);
+    }
+
+    .big-nav {
+        display: none;
+    }
+
+    /* MENU */
+    .mobile-menu-content {
+        max-height: 0;
+        overflow: hidden;
+    }
+
+    .collapsible-menu {
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: $text-color-to-dark-menu;
+        }
+
+        .btn-inline {
+            display: inline-block;
+            padding: 10px;
+            text-decoration: none;
+            color: black;
+        }
+
+        label {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            cursor: pointer;
+        }
+    }
+
+    input{
+       &#menu {
+        display: none; 
+       }
+
+        /* Toggle Effect */
+        &:checked ~ .mobile-menu-content {
+        max-height: 100%;
+        }
+    }
+
+    .main-content {
+        padding-top: 15px;
+    }
+
+    .btn-mobile {
+        margin: 15px;
+    }
+}
+
+/* komputery osobiste */
+@media (min-width: 992px) {
+    
+    .mobile {
+        display: none;
+    }
+
+    .small-nav {
+        display: none;
+    }
+
+    .nav-buttons {
+        position: absolute;
+        right: 0px;
+        top: 0px;
+    }
+
+    .statistics {
+        padding-top: 20px;
+        border-top: 1px solid black;
+        margin-top: 20px;
+    }
+
+    .nav-left-site {
+        border-right: 1px solid black;
+        margin: 35px 20px 50px 0px;
+        min-width: 220px;
+    }
+}
