@@ -1,0 +1,136 @@
+<?php
+# include 'inc/init.php';
+?>
+    <!DOCTYPE html>
+    <html lang="pl">
+    <head>
+        <title>System udostępniania wykładów</title>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+        <link rel="manifest" href="/site.webmanifest">
+        <link rel="mask-icon" href="/assets/safari-pinned-tab.svg" color="#5bbad5">
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="theme-color" content="#ffffff">
+        -->
+        {% stylesheets
+            'css/main.css'
+            '@bootstrap_css'
+            filter='cssrewrite' %}
+            <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
+        <!-- Styles 
+        <link rel="stylesheet" type="text/css" href="css/main.css">
+        <link rel="stylesheet" href="@bootstrap_css">
+        -->
+    </head>
+    <body>
+    <nav class="collapsible-menu navbar-dark bg-primary" style="position: sticky; z-index:1000;">
+        <span class="big-nav"><a class="navbar-brand" href='index.php?page=main'>System Udostępniania Wykładów</a></span>
+        <span class="small-nav"><a class="navbar-brand" href="index.php">SUW</a></span>
+        <input class="small-nav" type="checkbox" id="menu">
+        <label class="small-nav" for="menu"><img src="assets/burger.svg" alt="MENU" height="42" width="42"></label>
+
+        <!-- to mobile topbar -->
+        <div class="mobile-menu-content small-nav">
+            <a class="nav-link <?= ($page == 'main') ? ' mobile-active' : '' ?>"
+                href='index.php?page=main'>
+                STRONA GŁÓWNA</a>
+            <a class="nav-link <?= ($page == 'fileUpload') ? ' mobile-active' : '' ?>"
+                href='index.php?page=fileUpload' 
+                style="<?= (Login::$logged == TRUE && ($userType == "Wykładowca" || $userType == "Admin")) ? 'display:block': 'display:none'?>">
+                ZARZĄDZANIE MATERIAŁAMI</a>
+            <a class="nav-link<?= ($page == 'fileSearch') ? ' mobile-active' : '' ?>"
+                href='index.php?page=fileSearch'
+                style="<?= (Login::$logged == TRUE &&  ($userType == "Student" || $userType == "Admin" )) ? 'display:block': 'display:none'?>">
+                PRZEGLĄDAJ WYKŁADY/KURSY</a>
+            <a class="nav-link"
+                href='?page=userPanel'
+                style="<?= (Login::$logged == TRUE) ? 'display:block': 'display:none'?>">
+                <span class="<?= ($page == 'userPanel') ? ' mobile-active' : '' ?>" style="display:inline">PANEL UŻYTKOWNIKA</span> </a>
+            <a class="nav-link"
+                href='?page=permManagement'
+                style="<?= (login::$logged == TRUE) ? 'display:block': 'display:none'?>">
+                <span class="<?= ($page == 'permManagement') ? ' mobile-active' : '' ?>" style="display:inline">ZARZĄDZANIE UPRAWNIENIAMI</span> </a>
+            <a class="nav-link<?= ($page == 'admin') ? ' mobile-active' : '' ?>"
+                href='?page=admin'
+                style="<?= (Login::$logged == TRUE && $userType == "Admin") ? 'display:block': 'display:none'?>">
+                PANEL ADMINISTRATORA</a>
+            <?php if (Login::$logged !== TRUE) { ?>
+                <div>
+                    <a href="?page=register" class="btn btn-light btn-inline btn-mobile">REJESTRACJA</a>
+                    <a href="?page=login" class="btn btn-light btn-inline btn-mobile">LOGOWANIE</a>
+                </div>
+            <?php } else { ?>
+                <p></p>
+                <p> Zalogowany jako: <?= Login::$login ?>
+                    <a href="?page=login&action=logout" class="btn btn-light btn-inline">WYLOGUJ</a></p>
+            <?php } ?>
+        </div>
+
+        <!-- to desktop topbar -->
+        <?php if (Login::$logged !== TRUE) { ?>
+            <div class="nav-buttons big-nav">
+                <a href="?page=register" class="btn btn-light btn-inline">REJESTRACJA</a>
+                <a href="?page=login" class="btn btn-light btn-inline">LOGOWANIE</a>
+            </div>
+        <?php } else { ?>
+            <div class="nav-buttons big-nav"><p class="lead">Zalogowany
+                    jako: <?= User::getUserType(Login::$login) . ' ' . Login::$login ?>
+                    <a href="?page=login&action=logout" class="btn btn-light btn-inline"> WYLOGUJ</a></p>
+            </div>
+        <?php } ?>
+
+    </nav>
+
+    <!-- desktop navigation -->
+    <div class="row" style="margin: 0;">
+        <div class="col-md-2 col-sm-0 nav-left-site big-nav">
+            <div class="list-group nav flex-column">
+                <a class="nav-link list-group-item list-group-item-action<?= ($page == 'main') ? ' active' : '' ?>"
+                    href='index.php?page=main'>
+                    STRONA GŁÓWNA</a>
+                <a class="nav-link list-group-item list-group-item-action<?= ($page == 'fileUpload') ? ' active' : '' ?>"
+                    href='index.php?page=fileUpload' 
+                    style="<?= (Login::$logged == TRUE && ($userType == "Wykładowca" || $userType == "Admin")) ? 'display:block': 'display:none'?>">
+                    ZARZĄDZANIE MATERIAŁAMI</a>
+                <a class="nav-link list-group-item list-group-item-action<?= ($page == 'fileSearch') ? ' active' : '' ?>"
+                    href='index.php?page=fileSearch'
+                    style="<?= (Login::$logged == TRUE &&  ($userType == "Student" || $userType == "Admin" )) ? 'display:block': 'display:none'?>">
+                    PRZEGLĄDAJ WYKŁADY/KURSY</a>
+                <a class="nav-link list-group-item list-group-item-action<?= ($page == 'permManagement') ? ' active' : '' ?>"
+                    href='?page=permManagement'
+                    style="<?= (login::$logged == TRUE && ($userType == "Wykładowca" || $userType == "Admin")) ? 'display:block': 'display:none'?>">
+                    ZARZĄDZANIE UPRAWNIENIAMI</a>
+                <a class="nav-link list-group-item list-group-item-action<?= ($page == 'userPanel') ? ' active' : '' ?>"
+                    href='?page=userPanel'
+                    style="<?= (Login::$logged == TRUE) ? 'display:block': 'display:none'?>">
+                    PANEL UŻYTKOWNIKA</a>
+                <a class="nav-link list-group-item list-group-item-action<?= ($page == 'admin') ? ' active' : '' ?>"
+                    href='?page=admin'
+                    style="<?= (Login::$logged == TRUE && $userType == "Admin") ? 'display:block': 'display:none'?>">
+                    PANEL ADMINISTRATORA</a>
+            </div>
+            <div class="statistics">
+                <?php Load::getPage('stats'); ?>
+            </div>
+        </div>
+        <div class="col-lg-9 col-sm-12 main-content">
+            <div class="alert alert-warning hidden" style="margin-top: 15px;"><strong>ERROR_TAG</strong></div>
+            <?php Load::getPage($page); ?>
+        </div>
+    </div>
+    <footer>
+        <h5 class="text-center">Copyright ZUT 2018</h5>
+    </footer>
+    <script type="text/javascript">
+        document.getElementsByTagName("div")[0].style.display = "none";
+        document.getElementsByTagName("div")[1].style.display = "none";
+    </script>
+    </body>
+    </html>
+<?php
+Warning::display();
+?>
