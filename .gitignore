@@ -13,9 +13,18 @@ Desktop.ini
 # ignore Composer downloads
 /vendor/*
 composer.phar
-
+composer.lock
 # keep some hiddens
 !.htaccess
 !/.gitignore
 !/.travis.yml
 /app/config/parameters.yml
+/web/bundles/
+/app/bootstrap.php.cache
+/app/cache/*
+/app/logs/*
+!app/cache/.gitkeep
+!app/logs/.gitkeep
+/app/phpunit.xml
+/build/
+/bin/
