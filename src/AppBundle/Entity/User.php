@@ -7,11 +7,13 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * User
  *
- * @ORM\Table(name="user")
+ * @ORM\Table(name="`user`")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
  */
 class User
 {
+    const USER_ROLE = 'admin';
+
     /**
      * @var int
      *

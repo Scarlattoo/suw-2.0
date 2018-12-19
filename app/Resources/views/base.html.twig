@@ -1,16 +1,134 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %} 
-        {% endblock %}
-        <link rel="stylesheet" type="\suw\web\css\style.css">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8"/>
+    <title>{% block title %}SUW{% endblock %}</title>
+    {% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/style.scss') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    {% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+</head>
+<body>
+<nav class="collapsible-menu navbar-dark bg-primary" style="position: sticky; z-index:1000;">
+    <span class="big-nav"><a class="navbar-brand" href='{{ url('main') }}'>System Udostępniania Wykładów</a></span>
+    <span class="small-nav"><a class="navbar-brand" href="{{ url('main') }}">SUW</a></span>
+    <input class="small-nav" type="checkbox" id="menu">
+    <label class="small-nav" for="menu"><img src="{{ asset('assets/burger.svg') }}" alt="MENU" height="42" width="42"></label>
+
+    <!-- to mobile topbar -->
+    <div class="mobile-menu-content small-nav">
+        <a class="nav-link {% if app.request.attributes.get("_route") == 'main' %} mobile-active{% endif %}"
+           href='{{ url('main') }}'>
+            STRONA GŁÓWNA</a>
+        <a class="nav-link {% if app.request.attributes.get("_route") == 'wyklady' %} mobile-active{% endif %}"
+           href='{{ url('wyklady') }}'
+           style="{% if constant('AppBundle\\Entity\\User::USER_ROLE') == 'wykladowca' or constant('AppBundle\\Entity\\User::USER_ROLE') == 'admin' %}display:block{% else %}display:none{% endif %}">
+        ZARZĄDZANIE MATERIAŁAMI</a>
+        <a class="nav-link{% if app.request.attributes.get("_route") == 'fileSearch' %} mobile-active{% endif %}"
+           href='{{ url('fileSearch') }}'
+           style="{% if constant('AppBundle\\Entity\\User::USER_ROLE') == 'student' or constant('AppBundle\\Entity\\User::USER_ROLE') == 'admin' %}display:block{% else %}display:none{% endif %}">
+        PRZEGLĄDAJ WYKŁADY/KURSY</a>
+        <a class="nav-link"
+           href='{{ url('userPanel') }}'
+           style="{% if constant('AppBundle\\Entity\\User::USER_ROLE') != 'niezalogowany' %}display:block{% else %}display:none{% endif %}">
+            <span class="<{% if app.request.attributes.get("_route") == 'userPanel' %} mobile-active{% endif %}"
+                  style="display:inline">PANEL UŻYTKOWNIKA</span> </a>
+        <a class="nav-link"
+           href='{{ url('permManagement') }}'
+           style="{% if constant('AppBundle\\Entity\\User::USER_ROLE') == 'wykladowca' or constant('AppBundle\\Entity\\User::USER_ROLE') == 'admin' %}display:block{% else %}display:none{% endif %}">
+            <span class="{% if app.request.attributes.get("_route") == 'permManagement'  %} mobile-active{% endif %}" style="display:inline">ZARZĄDZANIE UPRAWNIENIAMI</span>
+        </a>
+        <a class="nav-link{% if app.request.attributes.get("_route") == 'admin'  %} mobile-active{% endif %}"
+           href='{{ url('admin') }}'
+           style="{% if constant('AppBundle\\Entity\\User::USER_ROLE') == 'admin' %}display:block{% else %}display:none{% endif %}">
+        PANEL ADMINISTRATORA</a>
+        {% if constant('AppBundle\\Entity\\User::USER_ROLE') == 'niezalogowany' %}
+        <div>
+            <a href="{{ url('register') }}" class="btn btn-light btn-inline btn-mobile">REJESTRACJA</a>
+            <a href="{{ url('login') }}" class="btn btn-light btn-inline btn-mobile">LOGOWANIE</a>
+        </div>
+        {% else %}
+        <p></p>
+        <p> Zalogowany jako: {{ constant('AppBundle\\Entity\\User::USER_ROLE') }}
+            <a href="{{ url('logout') }}" class="btn btn-light btn-inline">WYLOGUJ</a></p>
+        {% endif %}
+    </div>
+
+    <!-- to desktop topbar -->
+    {% if constant('AppBundle\\Entity\\User::USER_ROLE') == 'niezalogowany' %}
+    <div class="nav-buttons big-nav">
+        <a href="{{ url('register') }}" class="btn btn-light btn-inline">REJESTRACJA</a>
+        <a href="{{ url('login') }}" class="btn btn-light btn-inline">LOGOWANIE</a>
+    </div>
+    {% else %}
+    <div class="nav-buttons big-nav"><p class="lead">Zalogowany
+            jako: {{ constant('AppBundle\\Entity\\User::USER_ROLE') }}
+            <a href="{{ url('logout') }}" class="btn btn-light btn-inline"> WYLOGUJ</a></p>
+    </div>
+    {% endif %}
+
+</nav>
+
+<!-- desktop navigation -->
+<div class="row" style="margin: 0;">
+    <div class="col-md-2 col-sm-0 nav-left-site big-nav">
+        <div class="list-group nav flex-column">
+            <a class="nav-link list-group-item list-group-item-action{% if app.request.attributes.get("_route") == 'main'  %} active{% endif %}"
+               href='{{ url('main') }}'>
+                STRONA GŁÓWNA</a>
+            <a class="nav-link list-group-item list-group-item-action{% if app.request.attributes.get("_route") == 'wyklady'  %} active{% endif %}"
+               href='{{ url('wyklady') }}'
+               style="{% if constant('AppBundle\\Entity\\User::USER_ROLE') == 'wykladowca' or constant('AppBundle\\Entity\\User::USER_ROLE') == 'admin' %}display:block{% else %}display:none{% endif %}">
+            ZARZĄDZANIE MATERIAŁAMI</a>
+            <a class="nav-link list-group-item list-group-item-action{% if app.request.attributes.get("_route") == 'fileSearch'  %} active{% endif %}"
+               href='{{ url('fileSearch') }}'
+               style="{% if constant('AppBundle\\Entity\\User::USER_ROLE') == 'student' or constant('AppBundle\\Entity\\User::USER_ROLE') == 'admin' %}display:block{% else %}display:none{% endif %}">
+            PRZEGLĄDAJ WYKŁADY/KURSY</a>
+            <a class="nav-link list-group-item list-group-item-action{% if app.request.attributes.get("_route") == 'permManagement'  %} active{% endif %}"
+               href='{{ url('permManagement') }}'
+               style="{% if constant('AppBundle\\Entity\\User::USER_ROLE') == 'wykladowca' or constant('AppBundle\\Entity\\User::USER_ROLE') == 'admin' %}display:block{% else %}display:none{% endif %}">
+            ZARZĄDZANIE UPRAWNIENIAMI</a>
+            <a class="nav-link list-group-item list-group-item-action{% if app.request.attributes.get("_route") == 'userPanel'  %} active{% endif %}"
+               href='{{ url('userPanel') }}'
+               style="{% if constant('AppBundle\\Entity\\User::USER_ROLE') != 'niezalogowany' %}display:block{% else %}display:none{% endif %}">
+                PANEL UŻYTKOWNIKA</a>
+            <a class="nav-link list-group-item list-group-item-action{% if app.request.attributes.get("_route") == 'admin'  %} active{% endif %}"
+               href='{{ url('admin') }}'
+               style="{% if constant('AppBundle\\Entity\\User::USER_ROLE') == 'admin' %}display:block{% else %}display:none{% endif %}">
+            PANEL ADMINISTRATORA</a>
+        </div>
+        <div class="statistics">
+            <ul class="list-group">
+                <li class="list-group-item list-group-item-secondary"><strong>Liczba użytkowników:</strong></li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">Ogółem: <span
+                            class="badge badge-primary badge-pill">345</span></li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">Zalogowanych: <span
+                            class="badge badge-primary badge-pill">12</span></li>
+                <li class="list-group-item list-group-item-secondary"><strong>Liczba pobrań:</strong></li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">dzień: <span
+                            class="badge badge-primary badge-pill">22</span></li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">miesiąc: <span
+                            class="badge badge-primary badge-pill">12</span></li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">semestr: <span
+                            class="badge badge-primary badge-pill">10</span></li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-lg-9 col-sm-12 main-content">
+        <div class="alert alert-warning hidden" style="margin-top: 15px;"><strong>{% block msg %}{% endblock %}</strong></div>
+        {% block body %}{{ dump(content) }}{% endblock %}
+    </div>
+</div>
+<footer>
+    <h5 class="text-center">Copyright ZUT {{ "now"|date("Y") }}</h5>
+</footer>
+{% block javascripts %}
+<script type="text/javascript">
+    document.getElementsByTagName("div")[0].style.display = "none";
+    document.getElementsByTagName("div")[1].style.display = "none";
+</script>
+{% endblock %}
+</body>
 </html>
