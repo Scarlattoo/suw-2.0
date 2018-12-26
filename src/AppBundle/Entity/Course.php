@@ -32,7 +32,7 @@ class Course
      * @var int
      *
      * @ORM\Column(name="userId", type="integer")
-     * @ORM\OneToOne(targetEntity="User", inversedBy="CourseUser")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="id")
      * @ORM\JoinColumn(name="userId", referencedColumnName="id")
      */
     private $userId;

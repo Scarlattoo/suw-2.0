@@ -67,7 +67,7 @@ class File
      * @var int
      *
      * @ORM\Column(name="courseId", type="integer")
-     * @ORM\ManyToOne(targetEntity="Course", inversedBy="FileCourses")
+     * @ORM\ManyToOne(targetEntity="Course", inversedBy="id")
      * @ORM\JoinColumn(name="courseId", referencedColumnName="id")
      */
     private $courseId;
@@ -76,7 +76,7 @@ class File
      * @var int
      *
      * @ORM\Column(name="userId", type="integer")
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="FileUsers")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="id")
      * @ORM\JoinColumn(name="userId", referencedColumnName="id")
      */
     private $userId;

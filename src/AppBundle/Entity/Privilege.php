@@ -5,12 +5,12 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Priviledge
+ * Privilege
  *
- * @ORM\Table(name="priviledge")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\PriviledgeRepository")
+ * @ORM\Table(name="privilege")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\PrivilegeRepository")
  */
-class Priviledge
+class Privilege
 {
     /**
      * @var int
@@ -32,7 +32,7 @@ class Priviledge
      * @var int
      *
      * @ORM\Column(name="userId", type="integer")
-     * @ORM\OneToOne(targetEntity="User", inversedBy="PriviledgeUser")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="id")
      * @ORM\JoinColumn(name="userId", referencedColumnName="id")
      */
     private $userId;
@@ -41,7 +41,7 @@ class Priviledge
      * @var int
      *
      * @ORM\Column(name="fileId", type="integer")
-     * @ORM\OneToOne(targetEntity="File", inversedBy="PriviledgeFile")
+     * @ORM\ManyToOne(targetEntity="File", inversedBy="id")
      * @ORM\JoinColumn(name="fileId", referencedColumnName="id")
      */
     private $fileId;
@@ -62,7 +62,7 @@ class Priviledge
      *
      * @param boolean $clearanceLevel
      *
-     * @return Priviledge
+     * @return Privilege
      */
     public function setClearanceLevel($clearanceLevel)
     {
@@ -86,7 +86,7 @@ class Priviledge
      *
      * @param integer $userId
      *
-     * @return Priviledge
+     * @return Privilege
      */
     public function setUserId($userId)
     {
@@ -110,7 +110,7 @@ class Priviledge
      *
      * @param integer $fileId
      *
-     * @return Priviledge
+     * @return Privilege
      */
     public function setFileId($fileId)
     {

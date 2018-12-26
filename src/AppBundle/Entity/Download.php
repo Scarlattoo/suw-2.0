@@ -39,7 +39,7 @@ class Download
      * @var int
      *
      * @ORM\Column(name="userId", type="integer")
-     * @ORM\OneToOne(targetEntity="User", inversedBy="DownloadUser")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="id")
      * @ORM\JoinColumn(name="userId", referencedColumnName="id")
      */
     private $userId;
@@ -48,7 +48,7 @@ class Download
      * @var int
      *
      * @ORM\Column(name="fileId", type="integer")
-     * @ORM\OneToOne(targetEntity="File", inversedBy="DownloadFile")
+     * @ORM\ManyToOne(targetEntity="File", inversedBy="id")
      * @ORM\JoinColumn(name="fileId", referencedColumnName="id")
      */
     private $fileId;

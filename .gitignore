@@ -13,7 +13,6 @@ Desktop.ini
 # ignore Composer downloads
 /vendor/*
 composer.phar
-composer.lock
 # keep some hiddens
 !.htaccess
 !/.gitignore
@@ -29,3 +28,7 @@ composer.lock
 /app/phpunit.xml
 /build/
 /bin/
+/app/SymfonyRequirements.php
+/app/check.php
+/app/console
+/app/phpunit.xml.dist

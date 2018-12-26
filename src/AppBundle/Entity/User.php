@@ -20,9 +20,9 @@ class User
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\OneToMany(targetEntity="Priviledge", mappedBy="files")
-     * @ORM\OneToMany(targetEntity="Course", mappedBy="courses")
-     * @ORM\OneToMany(targetEntity="Download", mappedBy="downloads")
+     * @ORM\OneToMany(targetEntity="Privilege", mappedBy="userId")
+     * @ORM\OneToMany(targetEntity="Course", mappedBy="userId")
+     * @ORM\OneToMany(targetEntity="Download", mappedBy="userId")
      */
     private $id;
 
