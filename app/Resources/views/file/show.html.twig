@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>File</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ file.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ file.title }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ file.description }}</td>
+            </tr>
+            <tr>
+                <th>Size</th>
+                <td>{{ file.size }}</td>
+            </tr>
+            <tr>
+                <th>Time</th>
+                <td>{% if file.time %}{{ file.time|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ file.type }}</td>
+            </tr>
+            <tr>
+                <th>Filename</th>
+                <td>{{ file.filename }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('file_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('file_edit', { 'id': file.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

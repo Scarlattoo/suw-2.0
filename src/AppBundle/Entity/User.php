@@ -2,16 +2,28 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use Rollerworks\Component\PasswordStrength\Validator\Constraints as RollerworksPassword;
 
 /**
  * User
  *
  * @ORM\Table(name="`user`")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
+ * @UniqueEntity(fields="transcriptId", message="Użytkownik o podanym numerze już istnieje.")
  */
-class User
+class User implements UserInterface, \Serializable
 {
+    public function __toString()
+    {
+        return (string) $this->getUsername();
+    }
+
     const USER_ROLE = 'admin';
 
     /**
@@ -20,9 +32,6 @@ class User
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\OneToMany(targetEntity="Privilege", mappedBy="userId")
-     * @ORM\OneToMany(targetEntity="Course", mappedBy="userId")
-     * @ORM\OneToMany(targetEntity="Download", mappedBy="userId")
      */
     private $id;
 
@@ -30,8 +39,21 @@ class User
      * @var int
      *
      * @ORM\Column(name="transcriptId", type="integer", unique=true)
+     * @Assert\NotBlank
      */
     private $transcriptId;
+
+    /**
+     * @Assert\NotBlank
+     * @Assert\Length(max=4096)
+     * @RollerworksPassword\PasswordRequirements(requireLetters=true, requireNumbers=true, requireCaseDiff=true, minLength=7,
+     *     tooShortMessage = "Twoje hasło musi posiadać co najmniej {{length}} znaków.",
+     *     missingLettersMessage = "Twoje hasło musi posiadać co najmniej jedną literę.",
+     *     requireCaseDiffMessage = "Twoje hasło musi posiadać małe i duże litery.",
+     *     missingNumbersMessage = "Twoje hasło musi posiadać co najmniej jedną cyfrę.",
+     * )
+     */
+    private $plainPassword;
 
     /**
      * @var string
@@ -43,10 +65,44 @@ class User
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="lastActivity", type="datetime", nullable=true)
+     * @ORM\Column(name="lastActivity", type="datetime")
      */
     private $lastActivity;
 
+    /**
+     * @var array
+     * @ORM\Column(name="roles", type="array")
+     */
+    private $roles = array();
+
+    /**
+     * @ORM\OneToMany(targetEntity="Course", mappedBy="user")
+     */
+    private $courses;
+
+    /**
+     * @ORM\OneToMany(targetEntity="File", mappedBy="userId")
+     */
+    private $files;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Download", mappedBy="user")
+     */
+    private $downloads;
+
+    /**
+     * @var Collection
+     * @ORM\OneToMany(targetEntity="Privilege", mappedBy="user")
+     */
+    private $privileges;
+
+    public function __construct()
+    {
+        $this->courses = new ArrayCollection();
+        $this->files = new ArrayCollection();
+        $this->downloads = new ArrayCollection();
+        $this->privileges = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -80,6 +136,22 @@ class User
     public function getTranscriptId()
     {
         return $this->transcriptId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    /**
+     * @param mixed $plainPassword
+     */
+    public function setPlainPassword($plainPassword)
+    {
+        $this->plainPassword = $plainPassword;
     }
 
     /**
@@ -128,5 +200,78 @@ class User
     public function getLastActivity()
     {
         return $this->lastActivity;
+    }
+
+    /**
+     * @return ArrayCollection|Course[]
+     */
+    public function getCourses()
+    {
+        return $this->courses;
+    }
+
+    /**
+     * @return ArrayCollection|File[]
+     */
+    public function getFiles()
+    {
+        return $this->files;
+    }
+
+    /**
+     * @return ArrayCollection|Download[]
+     */
+    public function getDownloads()
+    {
+        return $this->downloads;
+    }
+
+    /**
+     * @return ArrayCollection|Privilege[]
+     */
+    public function getPrivileges()
+    {
+        return $this->privileges;
+    }
+
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->transcriptId,
+            $this->password
+        ));
+    }
+
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->transcriptId,
+            $this->password
+            ) = unserialize($serialized, array('allowed_classes' => false));
+    }
+
+    public function setRoles($roles) {
+        $this->roles = array_unique(array_merge($roles, $this->getRoles()));
+    }
+    public function getRoles()
+    {
+        return $this->roles;
+    }
+
+    public function getSalt()
+    {
+        return null;
+    }
+
+    public function getUsername()
+    {
+        return $this->transcriptId;
+    }
+
+    public function eraseCredentials()
+    {
+        $this->plainPassword = null;
     }
 }

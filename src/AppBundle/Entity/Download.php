@@ -37,21 +37,17 @@ class Download
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="userId", type="integer")
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="id")
-     * @ORM\JoinColumn(name="userId", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="downloads")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
-    private $userId;
+    private $user;
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="fileId", type="integer")
-     * @ORM\ManyToOne(targetEntity="File", inversedBy="id")
-     * @ORM\JoinColumn(name="fileId", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="File")
+     * @ORM\JoinColumn(name="file_id", referencedColumnName="id")
      */
-    private $fileId;
+    private $file;
 
 
     /**
@@ -113,50 +109,50 @@ class Download
     }
 
     /**
-     * Set userId
+     * Set user
      *
-     * @param integer $userId
+     * @param integer $user
      *
      * @return Download
      */
-    public function setUserId($userId)
+    public function setUser($user)
     {
-        $this->userId = $userId;
+        $this->user = $user;
 
         return $this;
     }
 
     /**
-     * Get userId
+     * Get user
      *
      * @return int
      */
-    public function getUserId()
+    public function getUser()
     {
-        return $this->userId;
+        return $this->user;
     }
 
     /**
-     * Set fileId
+     * Set file
      *
-     * @param integer $fileId
+     * @param integer $file
      *
      * @return Download
      */
-    public function setFileId($fileId)
+    public function setFile($file)
     {
-        $this->fileId = $fileId;
+        $this->file = $file;
 
         return $this;
     }
 
     /**
-     * Get fileId
+     * Get file
      *
      * @return int
      */
-    public function getFileId()
+    public function getFile()
     {
-        return $this->fileId;
+        return $this->file;
     }
 }

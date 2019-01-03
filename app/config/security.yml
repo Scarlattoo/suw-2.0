@@ -1,11 +1,16 @@
 # To get started with security, check out the documentation:
 # http://symfony.com/doc/current/book/security.html
 security:
+    encoders:
+        AppBundle\Entity\User:
+            algorithm: bcrypt
 
     # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     providers:
-        in_memory:
-            memory: ~
+        db_provider:
+            entity:
+                class: AppBundle:User
+                property: transcriptId
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -14,11 +19,28 @@ security:
             security: false
 
         main:
+            pattern: ^/.*
+            provider: db_provider
+            # #a-configuring-how-your-users-will-authenticate
+            logout:
+                path: /wyloguj
+                target: /wylogowano
+            form_login:
+                login_path: login
+                check_path: login
+                failure_path: login_fail
+                target_path_parameter: _security.main.target_path
             anonymous: ~
-            # activate different ways to authenticate
 
-            # http_basic: ~
-            # http://symfony.com/doc/current/book/security.html#a-configuring-how-your-users-will-authenticate
-
-            # form_login: ~
             # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
+
+
+    access_control:
+        - { path: ^(/|/logowanie|/rejestracja|/wylogowano|/blad_logowania)$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/(wyklady|panel_uzytkownika).*, role: ROLE_USER }
+        - { path: ^/(wyklady|zarzadzanie_wykladami|zarzadzanie_uprawnieniami|panel_uzytkownika).*$, role: ROLE_LECTURER }
+        - { path: ^.*$ , role: ROLE_ADMIN }
+
+    role_hierarchy:
+        ROLE_ADMIN: [ROLE_USER, ROLE_LECTURER]
+        ROLE_LECTURER: ROLE_USER

@@ -12,6 +12,6 @@ class PermManagementController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('base.html.twig', array('content' => 'Tutaj będzie zarzadzanie_uprawnieniami'));
+        return $this->render('base.html.twig', array('content' => 'Tutaj nie będzie zarzadzanie_uprawnieniami'));
     }
 }

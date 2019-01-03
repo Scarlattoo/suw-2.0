@@ -12,6 +12,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Course
 {
+    public function __toString()
+    {
+        return $this->getName();
+    }
+
     /**
      * @var int
      *
@@ -29,14 +34,11 @@ class Course
     private $name;
 
     /**
-     * @var int
      *
-     * @ORM\Column(name="userId", type="integer")
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="id")
-     * @ORM\JoinColumn(name="userId", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="courses")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
-    private $userId;
-
+    private $user;
 
     /**
      * Get id
@@ -73,26 +75,26 @@ class Course
     }
 
     /**
-     * Set userId
+     * Set user
      *
-     * @param integer $userId
+     * @param integer $user
      *
      * @return Course
      */
-    public function setUserId($userId)
+    public function setUser($user)
     {
-        $this->userId = $userId;
+        $this->user = $user;
 
         return $this;
     }
 
     /**
-     * Get userId
+     * Get user
      *
      * @return int
      */
-    public function getUserId()
+    public function getUser()
     {
-        return $this->userId;
+        return $this->user;
     }
 }

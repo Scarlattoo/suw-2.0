@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9822eef2cbbad5076465549de95c80ff",
+    "content-hash": "39bcedf944091bd331b98e151748f177",
     "packages": [
         {
             "name": "composer/ca-bundle",
@@ -1112,6 +1112,55 @@
             "time": "2018-07-02T15:55:56+00:00"
         },
         {
+            "name": "psr/container",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/container.git",
+                "reference": "b7ce3b176482dbbc1245ebf52b181af44c2cf55f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/container/zipball/b7ce3b176482dbbc1245ebf52b181af44c2cf55f",
+                "reference": "b7ce3b176482dbbc1245ebf52b181af44c2cf55f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\Container\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common Container Interface (PHP FIG PSR-11)",
+            "homepage": "https://github.com/php-fig/container",
+            "keywords": [
+                "PSR-11",
+                "container",
+                "container-interface",
+                "container-interop",
+                "psr"
+            ],
+            "time": "2017-02-14T16:28:37+00:00"
+        },
+        {
             "name": "psr/log",
             "version": "1.1.0",
             "source": {
@@ -1157,6 +1206,142 @@
                 "psr-3"
             ],
             "time": "2018-11-20T15:27:04+00:00"
+        },
+        {
+            "name": "rollerworks/password-strength-bundle",
+            "version": "v1.7.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rollerworks/PasswordStrengthBundle.git",
+                "reference": "4a086a80f0c75f396d9f89c1efafe3892c6d4059"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rollerworks/PasswordStrengthBundle/zipball/4a086a80f0c75f396d9f89c1efafe3892c6d4059",
+                "reference": "4a086a80f0c75f396d9f89c1efafe3892c6d4059",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.6 || ^7.0",
+                "rollerworks/password-strength-validator": "^1.0.1",
+                "symfony/console": "^2.8.25 || ^3.3.6",
+                "symfony/framework-bundle": "^2.8.25 || ^3.3.6",
+                "symfony/polyfill-mbstring": "^1.5.0",
+                "symfony/validator": "^2.8.25 || ^3.3.6"
+            },
+            "require-dev": {
+                "matthiasnoback/symfony-dependency-injection-test": "^1.1.0",
+                "matthiasnoback/symfony-service-definition-validator": "^1.2.2",
+                "symfony/phpunit-bridge": "^3.3.6"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.7-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Rollerworks\\Bundle\\PasswordStrengthBundle\\": "src/"
+                },
+                "exclude-from-classmap": [
+                    "test/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastiaan Stok",
+                    "email": "s.stok@rollercapes.net"
+                },
+                {
+                    "name": "Luis Cordova",
+                    "email": "cordoval@gmail.com"
+                },
+                {
+                    "name": "Community contributions",
+                    "homepage": "https://github.com/rollerworks/PasswordStrengthBundle/contributors"
+                }
+            ],
+            "description": "Password-strength validator bundle for Symfony",
+            "keywords": [
+                "bundle",
+                "password",
+                "symfony",
+                "validator"
+            ],
+            "time": "2017-09-05T17:29:54+00:00"
+        },
+        {
+            "name": "rollerworks/password-strength-validator",
+            "version": "v1.1.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rollerworks/PasswordStrengthValidator.git",
+                "reference": "90459659cf9f3554029c4ff8206bbf20b79fd259"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rollerworks/PasswordStrengthValidator/zipball/90459659cf9f3554029c4ff8206bbf20b79fd259",
+                "reference": "90459659cf9f3554029c4ff8206bbf20b79fd259",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.6 || ^7.0",
+                "psr/container": "^1.0",
+                "psr/log": "^1.0",
+                "symfony/polyfill-mbstring": "^1.5.0",
+                "symfony/validator": "^2.8.9 || ^3.3.6 || ^4.0"
+            },
+            "require-dev": {
+                "guzzlehttp/psr7": "^1.4",
+                "php-http/httplug": "^1.1",
+                "symfony/config": "^3.3.6 || ^4.0",
+                "symfony/console": "^3.3.6 || ^4.0",
+                "symfony/phpunit-bridge": "^3.3.6 || ^4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Rollerworks\\Component\\PasswordStrength\\": "src/"
+                },
+                "exclude-from-classmap": [
+                    "test/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastiaan Stok",
+                    "email": "s.stok@rollercapes.net"
+                },
+                {
+                    "name": "Luis Cordova",
+                    "email": "cordoval@gmail.com"
+                },
+                {
+                    "name": "Community contributions",
+                    "homepage": "https://github.com/rollerworks/PasswordStrengthValidator/contributors"
+                }
+            ],
+            "description": "Password-strength validator for Symfony",
+            "keywords": [
+                "password",
+                "symfony",
+                "validator"
+            ],
+            "time": "2018-08-21T15:01:59+00:00"
         },
         {
             "name": "sensio/distribution-bundle",
@@ -1282,16 +1467,16 @@
         },
         {
             "name": "sensiolabs/security-checker",
-            "version": "v5.0.2",
+            "version": "v5.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/security-checker.git",
-                "reference": "728f9fb0fe815003b3bcfd331d33106c0d8a6b1e"
+                "reference": "46be3f58adac13084497961e10eed9a7fb4d44d1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/security-checker/zipball/728f9fb0fe815003b3bcfd331d33106c0d8a6b1e",
-                "reference": "728f9fb0fe815003b3bcfd331d33106c0d8a6b1e",
+                "url": "https://api.github.com/repos/sensiolabs/security-checker/zipball/46be3f58adac13084497961e10eed9a7fb4d44d1",
+                "reference": "46be3f58adac13084497961e10eed9a7fb4d44d1",
                 "shasum": ""
             },
             "require": {
@@ -1324,7 +1509,7 @@
                 }
             ],
             "description": "A security checker for your composer.lock",
-            "time": "2018-12-10T06:08:43+00:00"
+            "time": "2018-12-19T17:14:59+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

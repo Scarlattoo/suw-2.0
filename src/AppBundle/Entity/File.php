@@ -65,19 +65,15 @@ class File
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="courseId", type="integer")
-     * @ORM\ManyToOne(targetEntity="Course", inversedBy="id")
-     * @ORM\JoinColumn(name="courseId", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Course")
+     * @ORM\JoinColumn(name="course_id", referencedColumnName="id")
      */
-    private $courseId;
+    private $course;
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="userId", type="integer")
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="id")
-     * @ORM\JoinColumn(name="userId", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="files")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $userId;
 
@@ -237,31 +233,31 @@ class File
     }
 
     /**
-     * Set courseId
+     * Set course
      *
-     * @param integer $courseId
+     * @param integer $course
      *
      * @return File
      */
-    public function setCourseId($courseId)
+    public function setCourse($course)
     {
-        $this->courseId = $courseId;
+        $this->course = $course;
 
         return $this;
     }
 
     /**
-     * Get courseId
+     * Get course
      *
      * @return int
      */
-    public function getCourseId()
+    public function getCourse()
     {
-        return $this->courseId;
+        return $this->course;
     }
 
     /**
-     * Set userId
+     * Set user
      *
      * @param integer $userId
      *
@@ -275,7 +271,7 @@ class File
     }
 
     /**
-     * Get userId
+     * Get user
      *
      * @return int
      */

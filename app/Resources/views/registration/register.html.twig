@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+{% form_theme form _self %}
+
+ {#form_errors.html.twig#}
+{% block form_errors %}
+    {% spaceless %}
+
+        {% if errors|length > 0 %}
+            <div class="alert alert-danger" style="display: inline-block">
+                {% for error in errors %}
+                    {{ error.message }}<br />
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endspaceless %}
+{% endblock form_errors %}
+{% block form_row %}
+    {{ form_label(form) }}
+    {{ form_errors(form) }}
+    {% if form.vars.valid == false %}{{ form_widget(form,{'attr':{'class':'form-control is-invalid'}}) }}{% else %}{{ form_widget(form) }}{% endif %}
+{% endblock %}
+{% block title %}{{ parent() }} - Rejestracja{% endblock %}
+{% block body %}
+    <div class="login text-center">
+    <h4>Aby móc się zalogować i uzyskać dostęp do pełnej funkcjonalności musisz się zarejestrować.</h4>
+        <h5>Wprowadź swoje dane:</h5>
+        {{ form_start(form) }}
+        <div class="form-group">{{ form_row(form.transcriptId) }}</div>
+    <div class="form-group">{{ form_row(form.plainPassword.first) }}</div>
+    <div class="form-group">{{ form_row(form.plainPassword.second) }}</div>
+{{ form_end(form) }}
+    </div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+{% block title %}SUW - Strona główna{% endblock %}
+{% block body %}
+<div class="login text-center">
+    <h4>Aby uzyskać dostęp do pełnej funkcjonalności musisz się zalogować.</h4>
+    {% if is_granted('ROLE_USER') %}
+
+        <div class="login text-center">
+            <h5>Jesteś już zalogowany jako {{ app.user }}</h5>
+            <h5>Jeżeli to nie Ty, to proszę się <a href="{{ logout_path('main') }}"> wylogować.</a></h5>
+        </div>
+    {% else %}
+        <form action="{{ path('login') }}" method="post">
+            <div class="form-group">
+                <label>Wprowadź swoje dane do logowania:</label>
+                <input type="text" class="form-control" name="_username" id="inputLogin"
+                       placeholder="Twój numer użytkownika" required="required" autofocus>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" name="_password" id="inputPassword" placeholder="Twoje hasło" required="required">
+            </div>
+            <button type="submit" name="login" value="Zaloguj" class="btn btn-primary" style="width:150px">Zaloguj</button>
+        </form>
+        </div>
+    {% endif %}
+{% endblock %}
