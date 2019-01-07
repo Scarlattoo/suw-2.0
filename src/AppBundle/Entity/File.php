@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * File
@@ -54,7 +55,7 @@ class File
      *
      * @ORM\Column(name="type", type="string", length=255, nullable=true)
      */
-    private $type;
+    private $type="PDF";
 
     /**
      * @var string
@@ -66,17 +67,47 @@ class File
     /**
      * @var int
      * @ORM\ManyToOne(targetEntity="Course")
-     * @ORM\JoinColumn(name="course_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="course_id", referencedColumnName="id", onDelete="CASCADE")
+     * @Assert\NotBlank(message="Proszę wybrać kurs.")
      */
     private $course;
 
     /**
      * @var int
      * @ORM\ManyToOne(targetEntity="User", inversedBy="files")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $userId;
 
+    /**
+     * @ORM\Column(type="string")
+     * @Assert\NotBlank(message="Proszę wybrać plik PDF do wysłania.", groups={"newFile"})
+     * @Assert\File(
+     *     maxSize = "5M",
+     *     maxSizeMessage = "Plik powinien być mniejszy niż {{ limit }}{{ suffix }}",
+     *     mimeTypes = {"application/pdf", "application/x-pdf"},
+     *     mimeTypesMessage = "Proszę wybrać plik tylu PDF",
+     *     disallowEmptyMessage = "Plik nie może być pusty",
+     *     )
+     */
+    private $lectureFile;
+
+    /**
+     *
+     * @return mixed
+     */
+    public function getLectureFile()
+    {
+        return $this->lectureFile;
+    }
+
+    /**
+     * @param string $lectureFile
+     */
+    public function setLectureFile($lectureFile)
+    {
+        $this->lectureFile = $lectureFile;
+    }
 
     /**
      * Get id

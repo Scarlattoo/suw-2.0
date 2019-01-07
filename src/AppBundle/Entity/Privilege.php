@@ -31,14 +31,14 @@ class Privilege
     /**
      * @var int
      * @ORM\ManyToOne(targetEntity="User", inversedBy="privileges")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $user;
 
     /**
      * @var int
      * @ORM\ManyToOne(targetEntity="File")
-     * @ORM\JoinColumn(name="file_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="file_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $file;
 

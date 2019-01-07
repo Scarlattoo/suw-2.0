@@ -72,6 +72,7 @@
 </nav>
 
 <!-- desktop navigation -->
+<div class="container-fluid" style="margin: 0; padding: 0;">
 <div class="row" style="margin: 0;">
     <div class="col-md-2 col-sm-0 nav-left-site big-nav">
         <div class="list-group nav flex-column">
@@ -116,7 +117,7 @@
             </ul>
         </div>
     </div>
-    <div class="col-lg-9 col-sm-12 main-content">
+    <div class="col-md-10 col-sm-12 main-content">
         {% block msg %}
                         {% for label, messages in app.session.flashbag.all %}
                         {% for message in messages %}
@@ -132,6 +133,7 @@
 <footer>
     <h5 class="text-center">Copyright ZUT {{ "now"|date("Y") }}</h5>
 </footer>
+</div>
 {% block javascripts %}
 <script type="text/javascript">
     /*

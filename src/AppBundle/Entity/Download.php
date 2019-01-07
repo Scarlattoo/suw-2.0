@@ -38,14 +38,14 @@ class Download
     /**
      * @var int
      * @ORM\ManyToOne(targetEntity="User", inversedBy="downloads")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $user;
 
     /**
      * @var int
      * @ORM\ManyToOne(targetEntity="File")
-     * @ORM\JoinColumn(name="file_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="file_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $file;
 

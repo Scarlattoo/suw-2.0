@@ -14,6 +14,7 @@ html, body {
 
 .main-content{
     padding-top: 15px;
+    padding-right: 0;
 }
 
 .text-center {
@@ -154,7 +155,7 @@ th a{
 
     .nav-left-site {
         border-right: 1px solid black;
-        margin: 35px 20px 50px 0px;
+        margin: 35px 0 50px 0px;
         min-width: 220px;
     }
 }
