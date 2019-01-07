@@ -30,5 +30,4 @@ composer.phar
 /bin/
 /app/SymfonyRequirements.php
 /app/check.php
-/app/console
 /app/phpunit.xml.dist

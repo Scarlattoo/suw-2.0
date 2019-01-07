@@ -25,13 +25,13 @@ class UserType extends AbstractType
         $builder
             ->add('transcriptId', NumberType::class, array(
                 'label' => false,
-                'attr' => array('class' => 'form-control', 'placeholder' => 'Twój numer indeksu'),
+                'attr' => array('placeholder' => 'Twój numer indeksu'),
             ))
             ->add('plainPassword', RepeatedType::class,array(
                 'type' => PasswordType::class,
                 'invalid_message' => 'Hasła muszą być takie same',
-                'first_options'  => array('attr' => array('class' => 'form-control', 'placeholder' => 'Twoje hasło'), 'label' => false),
-                'second_options' => array('attr' => array('class' => 'form-control', 'placeholder' => 'Powtórz hasło'), 'label' => false),
+                'first_options'  => array('attr' => array('placeholder' => 'Twoje hasło'), 'label' => false),
+                'second_options' => array('attr' => array('placeholder' => 'Powtórz hasło'), 'label' => false),
             ))
             ->add('Wyślij', SubmitType::class, array(
                 'attr' => array('class' => 'btn btn-primary'),

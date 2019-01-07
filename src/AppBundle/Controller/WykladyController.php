@@ -13,10 +13,7 @@ class WykladyController extends Controller
      */
     public function show_all_lecturesAction()
     {
-        //Taki mały przykład na próbę ^^
-        $transcriptId=12345; //to będzie z logowania
-        $userRepository = $this->getDoctrine()->getRepository('AppBundle:User');
-        $user=$userRepository->findOneBytranscriptId($transcriptId);
+        $user=$this->getUser();
         $privileges = $user->getPrivileges();
         $files=array();
         $courses=array();
@@ -41,9 +38,7 @@ class WykladyController extends Controller
      */
     public function show_course_lecturesAction($course='all')
     {
-        $transcriptId=12345; //to będzie z logowania
-        $userRepository = $this->getDoctrine()->getRepository('AppBundle:User');
-        $user=$userRepository->findOneBytranscriptId($transcriptId);
+        $user=$this->getUser();
         $privileges = $user->getPrivileges();
         $files=array();
         foreach ($privileges AS $key => $privilege) {

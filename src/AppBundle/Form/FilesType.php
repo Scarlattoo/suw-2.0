@@ -26,12 +26,12 @@ class FilesType extends AbstractType
     {
         $user = $this->tokenStorage->getToken()->getUser();
         $courses=$user->getCourses()->getValues();
-        $builder->add('lectureFile', FileType::class, array('label' => 'Wybierz plik PDF', 'attr' => array('class' => 'form-control-file'),'required' => false, 'data_class' => null))
-            ->add('title',TextType::class, array('attr' => array('class' => 'form-control'),'required' => false))
-            ->add('description',TextType::class, array('attr' => array('class' => 'form-control'),'required' => false))
-            ->add('type',TextType::class, array('attr' => array('class' => 'form-control')))
-            ->add('filename',TextType::class, array('attr' => array('class' => 'form-control'),'required' => false))
-            ->add('course',EntityType::class, array('attr' => array('class' => 'form-control'),'class' => 'AppBundle:Course','choices' => $courses));
+        $builder->add('lectureFile', FileType::class, array('label' => 'Wybierz plik PDF', 'attr' => array(),'required' => false, 'data_class' => null))
+            ->add('title',TextType::class, array('attr' => array(),'required' => false))
+            ->add('description',TextType::class, array('attr' => array(),'required' => false))
+            ->add('type',TextType::class, array('attr' => array()))
+            ->add('filename',TextType::class, array('attr' => array(),'required' => false))
+            ->add('course',EntityType::class, array('attr' => array(),'class' => 'AppBundle:Course','choices' => $courses));
     }/**
      * {@inheritdoc}
      */
