@@ -3,50 +3,41 @@
 {% block body %}
     <h1>File</h1>
 
-    <table>
+    <table class="table table-sm table-striped table-hover">
         <tbody>
             <tr>
                 <th>Id</th>
                 <td>{{ file.id }}</td>
             </tr>
             <tr>
-                <th>Title</th>
+                <th>Tytuł</th>
                 <td>{{ file.title }}</td>
             </tr>
             <tr>
-                <th>Description</th>
+                <th>Opis</th>
                 <td>{{ file.description }}</td>
             </tr>
             <tr>
-                <th>Size</th>
-                <td>{{ file.size }}</td>
+                <th>Rozmiar</th>
+                <td>{{ file.size }} kb</td>
             </tr>
             <tr>
-                <th>Time</th>
+                <th>Czas dodania</th>
                 <td>{% if file.time %}{{ file.time|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
             <tr>
-                <th>Type</th>
+                <th>Typ</th>
                 <td>{{ file.type }}</td>
             </tr>
             <tr>
-                <th>Filename</th>
+                <th>Nazwa pliku</th>
                 <td>{{ file.filename }}</td>
             </tr>
         </tbody>
     </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('file_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('file_edit', { 'id': file.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
+            <a class="btn btn-primary" href="{{ path('file_index') }}">Powrót</a>
+            <a class="btn btn-primary" href="{{ path('file_edit', { 'id': file.id }) }}">Edytuj</a>
+            {#{{ path }}#}
         </li>
     </ul>
 {% endblock %}

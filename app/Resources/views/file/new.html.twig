@@ -1,16 +1,20 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>File creation</h1>
-
+    <h1>Udostępnianie wykładów</h1>
     {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
+    <div class="form-group">{{ form_row(form.course) }}</div>
+    <div class="form-group">{{ form_row(form.lectureFile) }}</div>
+    <div class="form-group">{{ form_row(form.title) }}</div>
+    <div class="form-group">{{ form_row(form.description) }}</div>
+    <div class="form-group">{{ form_row(form.type) }}</div>
+    <div class="form-group">{{ form_row(form.filename) }}</div>
+    <input class="btn btn-primary" type="submit" value="Wyślij">
     {{ form_end(form) }}
 
     <ul>
         <li>
-            <a href="{{ path('file_index') }}">Back to the list</a>
+            <a href="{{ path('file_index') }}">Powrót do listy</a>
         </li>
     </ul>
 {% endblock %}

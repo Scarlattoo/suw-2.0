@@ -7,3 +7,9 @@ services:
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+    file_form:
+        class: AppBundle\Form\FilesType
+        public: true
+        arguments:  ['@security.token_storage','@form.factory']
+        tags:
+            - { name: form.type }
