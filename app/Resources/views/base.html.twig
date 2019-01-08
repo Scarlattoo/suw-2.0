@@ -83,6 +83,10 @@
                href='{{ url('file_index') }}'
                style="{% if is_granted('ROLE_LECTURER') or is_granted('ROLE_ADMIN') %}display:block{% else %}display:none{% endif %}">
             ZARZĄDZANIE MATERIAŁAMI</a>
+            <a class="nav-link list-group-item list-group-item-action{% if app.request.attributes.get("_route") == 'watermTest'  %} active{% endif %}"
+               href='{{ url('watermTest') }}'
+               style="{% if is_granted('ROLE_USER') %}display:block{% else %}display:none{% endif %}">
+            TEST WATERMARK</a>
             <a class="nav-link list-group-item list-group-item-action{% if app.request.attributes.get("_route") == 'show_all_lectures'  %} active{% endif %}"
                href='{{ url('show_all_lectures') }}'
                style="{% if is_granted('ROLE_USER') or is_granted('ROLE_ADMIN') %}display:block{% else %}display:none{% endif %}">
