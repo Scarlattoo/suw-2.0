@@ -105,6 +105,10 @@
                    href='{{ url('admin') }}'
                    style="{% if is_granted('ROLE_ADMIN') %}display:block{% else %}display:none{% endif %}">
                     PANEL ADMINISTRATORA</a>
+                <a class="nav-link list-group-item list-group-item-action{% if app.request.attributes.get("_route") == 'watermTest'  %} active{% endif %}"
+                   href='{{ url('watermTest') }}'
+                   style="{% if is_granted('ROLE_USER') %}display:block{% else %}display:none{% endif %}">
+                    TEST WATERMARK</a>
             </div>
             <div class="statistics">
                 <ul class="list-group">
@@ -139,71 +143,6 @@
     <footer>
         <h5 class="text-center">Copyright ZUT {{ "now"|date("Y") }}</h5>
     </footer>
-<div class="row" style="margin: 0;">
-    <div class="col-md-2 col-sm-0 nav-left-site big-nav">
-        <div class="list-group nav flex-column">
-            <a class="nav-link list-group-item list-group-item-action{% if app.request.attributes.get("_route") == 'main'  %} active{% endif %}"
-               href='{{ url('main') }}'>
-                STRONA GŁÓWNA</a>
-            <a class="nav-link list-group-item list-group-item-action{% if app.request.attributes.get("_route") == 'file_index'  %} active{% endif %}"
-               href='{{ url('file_index') }}'
-               style="{% if is_granted('ROLE_LECTURER') or is_granted('ROLE_ADMIN') %}display:block{% else %}display:none{% endif %}">
-            ZARZĄDZANIE MATERIAŁAMI</a>
-            <a class="nav-link list-group-item list-group-item-action{% if app.request.attributes.get("_route") == 'watermTest'  %} active{% endif %}"
-               href='{{ url('watermTest') }}'
-               style="{% if is_granted('ROLE_USER') %}display:block{% else %}display:none{% endif %}">
-            TEST WATERMARK</a>
-            <a class="nav-link list-group-item list-group-item-action{% if app.request.attributes.get("_route") == 'show_all_lectures'  %} active{% endif %}"
-               href='{{ url('show_all_lectures') }}'
-               style="{% if is_granted('ROLE_USER') or is_granted('ROLE_ADMIN') %}display:block{% else %}display:none{% endif %}">
-            PRZEGLĄDAJ WYKŁADY/KURSY</a>
-            <a class="nav-link list-group-item list-group-item-action{% if app.request.attributes.get("_route") == 'permManagement'  %} active{% endif %}"
-               href='{{ url('permManagement') }}'
-               style="{% if is_granted('ROLE_LECTURER') or is_granted('ROLE_ADMIN') %}display:block{% else %}display:none{% endif %}">
-            ZARZĄDZANIE UPRAWNIENIAMI</a>
-            <a class="nav-link list-group-item list-group-item-action{% if app.request.attributes.get("_route") == 'userPanel'  %} active{% endif %}"
-               href='{{ url('userPanel') }}'
-               style="{% if is_granted('ROLE_USER') %}display:block{% else %}display:none{% endif %}">
-                PANEL UŻYTKOWNIKA</a>
-            <a class="nav-link list-group-item list-group-item-action{% if app.request.attributes.get("_route") == 'admin'  %} active{% endif %}"
-               href='{{ url('admin') }}'
-               style="{% if is_granted('ROLE_ADMIN') %}display:block{% else %}display:none{% endif %}">
-            PANEL ADMINISTRATORA</a>
-        </div>
-        <div class="statistics">
-            <ul class="list-group">
-                <li class="list-group-item list-group-item-secondary"><strong>Liczba użytkowników:</strong></li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">Ogółem: <span
-                            class="badge badge-primary badge-pill">345</span></li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">Zalogowanych: <span
-                            class="badge badge-primary badge-pill">12</span></li>
-                <li class="list-group-item list-group-item-secondary"><strong>Liczba pobrań:</strong></li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">dzień: <span
-                            class="badge badge-primary badge-pill">22</span></li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">miesiąc: <span
-                            class="badge badge-primary badge-pill">12</span></li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">semestr: <span
-                            class="badge badge-primary badge-pill">10</span></li>
-            </ul>
-        </div>
-    </div>
-    <div class="col-md-10 col-sm-12 main-content">
-        {% block msg %}
-                        {% for label, messages in app.session.flashbag.all %}
-                        {% for message in messages %}
-                    <div class="alert alert-{{ label }} flash-{{ label }}">
-                        {{ message }}
-                    </div>
-                        {% endfor %}
-                        {% endfor %}
-                {% endblock %}
-        {% block body %}{{ dump(content) }}{% endblock %}
-    </div>
-</div>
-<footer>
-    <h5 class="text-center">Copyright ZUT {{ "now"|date("Y") }}</h5>
-</footer>
-</div>
 {% block javascripts %}
     <script type="text/javascript">
         /*
