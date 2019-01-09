@@ -1,11 +1,15 @@
 <?php
 
 namespace AppBundle\Controller;
-use AppBundle\Entity\Course;
-use AppBundle\Entity\User;
+use AppBundle\Entity\File;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Class WykladyController
+ * @package AppBundle\Controller
+ */
 class WykladyController extends Controller
 {
     /**
@@ -14,44 +18,28 @@ class WykladyController extends Controller
     public function show_all_lecturesAction()
     {
         $user=$this->getUser();
-        $privileges = $user->getPrivileges();
-        $files=array();
-        $courses=array();
-        foreach ($privileges AS $key => $privilege) {
-            $files[$key]['title']=$privilege->getFile()->getTitle();
-            $files[$key]['description']=$privilege->getFile()->getDescription();
-            $files[$key]['size']=$privilege->getFile()->getSize();
-            $files[$key]['time']=$privilege->getFile()->getTime();
-            $files[$key]['type']=$privilege->getFile()->getType();
-            $files[$key]['filename']=$privilege->getFile()->getFilename();
-            $files[$key]['course']=$privilege->getFile()->getCourse()->getName();
-            $courses[]=$privilege->getFile()->getCourse()->getName();
-        }
-        $courses=array_unique($courses);
-        if (count($courses)===1) {
-            return $this->redirectToRoute('show_course_lectures',array ("course" => $courses[0]));
+        $files = $this->getDoctrine()->getRepository(File::class)
+            ->findAllByUserPrivileges($user);
+        if (count($files)===1) {
+            return $this->redirectToRoute('show_course_lectures',array ("course" => $files[0]['name']));
+        } else if (count($files)===0) {
+            return $this->render('base.html.twig',array('content' => '<h2>Brak udostępnionych wykładów</h2>'));
+        } else {
+            foreach ($files AS $file) {
+                $courses[]=$file['name'];
+            }
+            $courses=\array_unique($courses);
         }
         return $this->render('wyklady/files.html.twig', array('courses' => $courses, 'files' => $files));
     }
     /**
      * @Route("/wyklady/{course}", name="show_course_lectures", requirements={"course"="^\D+"})
      */
-    public function show_course_lecturesAction($course='all')
+    public function show_course_lecturesAction($course)
     {
         $user=$this->getUser();
-        $privileges = $user->getPrivileges();
-        $files=array();
-        foreach ($privileges AS $key => $privilege) {
-            if ($course=='all'||$course==$privilege->getFile()->getCourse()->getName()) {
-                $files[$key]['title'] = $privilege->getFile()->getTitle();
-                $files[$key]['description'] = $privilege->getFile()->getDescription();
-                $files[$key]['size'] = $privilege->getFile()->getSize();
-                $files[$key]['time'] = $privilege->getFile()->getTime();
-                $files[$key]['type'] = $privilege->getFile()->getType();
-                $files[$key]['filename'] = $privilege->getFile()->getFilename();
-                $files[$key]['course'] = $privilege->getFile()->getCourse()->getName();
-            } else continue;
-        }
-        return $this->render('wyklady/files.html.twig', array('courses' => '', 'files' => $files));
+        $files=$this->getDoctrine()->getRepository(File::class)
+            ->findAllByCourse($course,$user);
+        return $this->render('wyklady/course.html.twig', array('course' => $course, 'files' => $files));
     }
 }

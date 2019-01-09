@@ -3,7 +3,9 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\File;
+use AppBundle\Entity\Privilege;
 use AppBundle\Form\FilesType;
+use Proxies\__CG__\AppBundle\Entity\User;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -28,7 +30,7 @@ class FileController extends Controller
     {
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
-        $files = $em->getRepository(File::class)->findByUserId($user->getId());
+        $files = $em->getRepository(File::class)->findAllByUser($user);
         return $this->render('file/index.html.twig', array(
             'files' => $files,
         ));
@@ -37,22 +39,25 @@ class FileController extends Controller
     /**
      * Creates a new file entity.
      *
-     * @Route("/new", name="file_new")
+     * @Route("/udostępnij", name="file_new")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
     {
         $user=$this->getUser();
-        $courses=$user->getCourses()->getValues();
-//        foreach ($coursesRepo as $course) {
-//            $courses[$course->getName()]=$course->getId();
-//        }
         $file = new File();
-        $form = $this->createForm(FilesType::class, $file,array('validation_groups' => array('default','newFile')));
+        $form = $this->createForm(FilesType::class, $file,array('validation_groups' => array('default', 'newFile')));
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $lectureFile = $file->getLectureFile();
+            if (!$file->getType()) {
+                $file->setType($lectureFile->guessExtension());
+            }
+            if (!$file->getTitle()) {
+                $title=\explode('.',$lectureFile->getClientOriginalName());
+                $file->setTitle($title[0]);
+            }
             $fileName = $this->generateUniqueFileName().'.'.$lectureFile->guessExtension();
             // Move the file to the directory where brochures are stored
             try {
@@ -69,7 +74,7 @@ class FileController extends Controller
                 $file->setFilename($lectureFile->getClientOriginalName());
             }
             $file->setUserId($user);
-            $file->setSize($lectureFile->getClientSize()/1000);
+            $file->setSize(ceil($lectureFile->getClientSize()/1000));
             $file->setLectureFile($fileName);
             $now= new \DateTime('now');
             $file->setTime($now);
@@ -113,7 +118,7 @@ class FileController extends Controller
     /**
      * Displays a form to edit an existing file entity.
      *
-     * @Route("/{id}/edit", name="file_edit")
+     * @Route("/{id}/edytuj", name="file_edit")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, File $file)
@@ -151,22 +156,18 @@ class FileController extends Controller
         return $this->render('file/edit.html.twig', array(
             'file' => $file,
             'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
      * Deletes a file entity.
      *
-     * @Route("/{id}", name="file_delete")
-     * @Method("DELETE")
+     * @Route("/usun_plik/{id}", name="file_delete")
+     * @Method("GET")
      */
-    public function deleteAction(Request $request, File $file)
+    public function deleteAction($id)
     {
-        $form = $this->createDeleteForm($file);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
+        $file = $this->getDoctrine()->getRepository('AppBundle:File')->find($id);
             try {
                 $fileName=$this->getParameter('lectures_directory').DIRECTORY_SEPARATOR.$file->getLectureFile();
                 if (file_exists($fileName)) {
@@ -180,21 +181,9 @@ class FileController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->remove($file);
             $em->flush();
-        }
-
+        $this->addFlash('success','Plik usunięty pomyślnie.');
         return $this->redirectToRoute('file_index');
     }
-//    /**
-//     * Deletes a file entity.
-//     *
-//     * @Route("/{id}/confirmDelete", name="file_deleteConfirmation")
-//     * @Method("DELETE")
-//     */
-//    public function confirmDeleteAction(Request $request, File $file)
-//    {
-//
-//        return $this->redirectToRoute('file_index');
-//    }
 
     /**
      * Creates a form to delete a file entity.
@@ -211,4 +200,60 @@ class FileController extends Controller
             ->getForm()
         ;
     }
+
+    /**
+     * Creates a new privilege entity.
+     *
+     * @Route("/nadaj_uprawnienia/{fileId}", name="file_privilege")
+     * @Method({"GET", "POST"})
+     */
+    public function listAction(Request $request, $fileId)
+    {
+        $privilege = new Privilege();
+        $file = $this->getDoctrine()->getRepository('AppBundle:File')->find($fileId);
+        $privilege->setFile($file);
+        $privilege->setClearanceLevel(false);
+        $privileges = $this->getDoctrine()->getRepository('AppBundle:Privilege')->findByFile($fileId);
+//        $privileges = $this->get('doctrine.orm.entity_manager')
+//            ->createQuery('SELECT U.transcriptId
+//            FROM AppBundle:Privilege P
+//            JOIN AppBundle:User U
+//            WITH P.user = U
+//            AND P.file = :file')
+//            ->setParameter('file', $file)
+//            ->getResult();
+//        $users = $this->get('doctrine.orm.entity_manager')->createQuery('SELECT u.transcriptId FROM AppBundle:User u')->getResult();
+//        $choice = \array_diff($privileges,$users); //WTF
+        $form = $this->createForm('AppBundle\Form\PrivilegeType', $privilege,array('choices' => null));
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($privilege);
+            $em->flush();
+            return $this->redirectToRoute('file_privilege', array('fileId' => $fileId));
+        }
+
+        return $this->render('privilege/new.html.twig', array(
+            'file' => $file,
+            'privileges' => $privileges,
+            'form' => $form->createView(),
+        ));
+    }
+
+    /**
+     * Deletes a privilege entity.
+     *
+     * @Route("/usun_uprawnienie/{privilegeId}", name="privilege_delete")
+     * @Method("GET")
+     */
+    public function deletePrivilegeAction($privilegeId)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $privilege = $this->getDoctrine()->getRepository('AppBundle:Privilege')->find($privilegeId);
+        $fileId = $privilege->getFile()->getId();
+        $em->remove($privilege);
+        $em->flush();
+        return $this->redirectToRoute('file_privilege',array('fileId' => $fileId));
+    }
+
 }

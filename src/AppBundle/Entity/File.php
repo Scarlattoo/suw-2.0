@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -24,13 +25,14 @@ class File
 
     /**
      * @var string
-     *
+     * @Assert\Length(max=255, maxMessage="Tytuł jest za długi, max 255 znaków.", groups={"default"})
      * @ORM\Column(name="title", type="string", length=255, nullable=true)
      */
     private $title;
 
     /**
      * @var string
+     * @Assert\Length(max=255, maxMessage="Opis jest za długi, max 255 znaków.", groups={"default"})
      *
      * @ORM\Column(name="description", type="string", length=255, nullable=true)
      */
@@ -52,14 +54,14 @@ class File
 
     /**
      * @var string
-     *
+     * @Assert\Length(max=255, maxMessage="Typ jest za długi, max 255 znaków.", groups={"default"})
      * @ORM\Column(name="type", type="string", length=255, nullable=true)
      */
-    private $type="PDF";
+    private $type;
 
     /**
      * @var string
-     *
+     * @Assert\Length(max=255, maxMessage="Nazwa pliku jest za długa, max 255 znaków.", groups={"default"})
      * @ORM\Column(name="filename", type="string", length=255)
      */
     private $filename;
@@ -68,7 +70,7 @@ class File
      * @var int
      * @ORM\ManyToOne(targetEntity="Course")
      * @ORM\JoinColumn(name="course_id", referencedColumnName="id", onDelete="CASCADE")
-     * @Assert\NotBlank(message="Proszę wybrać kurs.")
+     * @Assert\NotBlank(message="Proszę wybrać kurs.", groups={"default"})
      */
     private $course;
 
@@ -84,10 +86,13 @@ class File
      * @Assert\NotBlank(message="Proszę wybrać plik PDF do wysłania.", groups={"newFile"})
      * @Assert\File(
      *     maxSize = "5M",
-     *     maxSizeMessage = "Plik powinien być mniejszy niż {{ limit }}{{ suffix }}",
      *     mimeTypes = {"application/pdf", "application/x-pdf"},
-     *     mimeTypesMessage = "Proszę wybrać plik tylu PDF",
+     *     maxSizeMessage = "Plik powinien być mniejszy niż {{ limit }}{{ suffix }}",
+     *     uploadIniSizeErrorMessage = "Plik powinien być mniejszy niż {{ limit }}{{ suffix }}",
+     *     uploadFormSizeErrorMessage = "Plik powinien być mniejszy niż {{ limit }}{{ suffix }}",
+     *     mimeTypesMessage = "Proszę wybrać plik typu PDF",
      *     disallowEmptyMessage = "Plik nie może być pusty",
+     *     groups={"default"}
      *     )
      */
     private $lectureFile;
@@ -309,5 +314,10 @@ class File
     public function getUserId()
     {
         return $this->userId;
+    }
+
+    public function __toString()
+    {
+        return (string) $this->getFilename();
     }
 }

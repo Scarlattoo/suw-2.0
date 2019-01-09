@@ -1,14 +1,28 @@
 {% extends 'base.html.twig' %}
+{% form_theme edit_form _self %}
+
+ {#form_errors.html.twig#}
+{% block form_errors %}
+    {% spaceless %}
+
+        {% if errors|length > 0 %}
+            <div class="alert alert-danger" style="display: inline-block">
+                {% for error in errors %}
+                    {{ error.message }}<br/>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endspaceless %}
+{% endblock form_errors %}
 
 {% block body %}
-    <h1>File edit</h1>
+    <h1>Edycja pliku</h1>
 
     {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input class="btn btn-secondary" type="submit" value="Edytuj" />
+    {{ form_widget(edit_form) }}
+    <input class="btn btn-warning" type="submit" value="Zapisz zmiany"/>
     {{ form_end(edit_form) }}
-            <a class="btn btn-primary" href="{{ path('file_index') }}">Powrót do listy</a>
-            {{ form_start(delete_form) }}
-                <input class="btn btn-danger" type="submit" value="Usuń">
-            {{ form_end(delete_form) }}
+    <a class="btn btn-primary" href="{{ path('file_index') }}">Powrót do listy</a>
+    <a class="btn btn-success" href="{{ path('file_privilege', { 'fileId': file.id }) }}">Udostępnij studentom</a>
+    <a class="btn btn-danger" href="{{ path('file_delete',{ 'id': file.id}) }}">Usuń</a>
 {% endblock %}

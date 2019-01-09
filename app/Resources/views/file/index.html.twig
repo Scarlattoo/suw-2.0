@@ -3,32 +3,34 @@
 {% block body %}
     <h1>Lista wykładów</h1>
     <a class="btn btn-primary" href="{{ path('file_new') }}">Udostępnij wykład</a>
-    <table class="table table-sm table-striped table-hover">
+    <table class="table table-sm table-striped">
         <thead>
-            <tr class="bg-primary text-white">
-                <th scope="col">#</th>
-                <th scope="col">Tytuł</th>
-                <th scope="col">Opis</th>
-                <th scope="col">Rozmiar</th>
-                <th scope="col">Czas dodania</th>
-                <th scope="col">Typ</th>
-                <th scope="col" colspan="3">Nazwa pliku</th>
-                <th scope="col">Akcje</th>
-            </tr>
+        <tr class="bg-primary text-white">
+            <th scope="col">#</th>
+            <th scope="col">Kurs</th>
+            <th scope="col">Tytuł</th>
+            <th scope="col">Opis</th>
+            <th scope="col">Rozmiar</th>
+            <th scope="col">Czas dodania</th>
+            <th scope="col">Typ</th>
+            <th scope="col" >Nazwa pliku</th>
+            <th scope="col">Akcje</th>
+        </tr>
         </thead>
         <tbody>
         {% for file in files %}
             <tr>
                 <td scope="row"><a href="{{ path('file_show', { 'id': file.id }) }}">{{ loop.index }}</a></td>
+                <td scope="row">{{ file.name }}</td>
                 <td scope="row">{{ file.title }}</td>
                 <td scope="row">{{ file.description }}</td>
-                <td scope="row">{{ file.size }}</td>
+                <td scope="row">{{ file.size }} kb</td>
                 <td scope="row">{% if file.time %}{{ file.time|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td scope="row">{{ file.type }}</td>
-                <td scope="row" colspan="3">{{ file.filename }}</td>
+                <td scope="row">{{ file.filename }}</td>
                 <td scope="row">
-                    <a class="btn btn-primary btn-sm" href="{{ path('file_show', { 'id': file.id }) }}">pokaż</a>
-                    <a class="btn btn-secondary btn-sm" href="{{ path('file_edit', { 'id': file.id }) }}">edytuj</a>
+                    <a href="{{ path('file_show', { 'id': file.id }) }}">pokaż</a>
+                    <a href="{{ path('file_edit', { 'id': file.id }) }}">edytuj</a>
                 </td>
             </tr>
         {% endfor %}

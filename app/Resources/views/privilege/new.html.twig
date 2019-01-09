@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h2>Nadawanie uprawnień do odczytu dla pliku "{{ file.title }}" ({{ file.filename }})</h2>
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Nadaj" />
+    {{ form_end(form) }}
+    <h2>Nadane uprawnienia:</h2>
+    <table class="table table-sm table-striped">
+        <thead>
+        <tr class="bg-primary text-white">
+            <th scope="col">#</th>
+            <th scope="col">Nr indeksu</th>
+            <th scope="col">Akcje</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for privilege in privileges %}
+            <tr>
+                <td scope="row">{{ loop.index }}</td>
+                <td scope="row">{{ privilege.user.transcriptId }}</td>
+                <td scope="row">
+                    <a href="{{ path('privilege_delete', { 'privilegeId': privilege.id }) }}">usuń</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

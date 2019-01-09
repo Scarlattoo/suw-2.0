@@ -1,4 +1,19 @@
 {% extends 'base.html.twig' %}
+{% form_theme form _self %}
+
+ {#form_errors.html.twig#}
+{% block form_errors %}
+    {% spaceless %}
+
+        {% if errors|length > 0 %}
+            <div class="alert alert-danger" style="display: inline-block">
+                {% for error in errors %}
+                    {{ error.message }}<br />
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endspaceless %}
+{% endblock form_errors %}
 
 {% block body %}
     <h1>Udostępnianie wykładów</h1>
@@ -7,10 +22,5 @@
     {{ form_widget(form) }}
     <input class="btn btn-primary" type="submit" value="Wyślij">
     {{ form_end(form) }}
-
-    <ul>
-        <li>
-            <a href="{{ path('file_index') }}">Powrót do listy</a>
-        </li>
-    </ul>
+            <a class="btn btn-primary" href="{{ path('file_index') }}">Powrót do listy</a>
 {% endblock %}

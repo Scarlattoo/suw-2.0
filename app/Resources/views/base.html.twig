@@ -4,9 +4,13 @@
     <meta charset="UTF-8"/>
     <title>{% block title %}SUW{% endblock %}</title>
     {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+              crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+              integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+              crossorigin="anonymous">
     {% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
 </head>
@@ -15,7 +19,8 @@
     <span class="big-nav"><a class="navbar-brand" href='{{ url('main') }}'>System Udostępniania Wykładów</a></span>
     <span class="small-nav"><a class="navbar-brand" href="{{ url('main') }}">SUW</a></span>
     <input class="small-nav" type="checkbox" id="menu">
-    <label class="small-nav" for="menu"><img src="{{ asset('assets/burger.svg') }}" alt="MENU" height="42" width="42"></label>
+    <label class="small-nav" for="menu"><img src="{{ asset('assets/burger.svg') }}" alt="MENU" height="42"
+                                             width="42"></label>
 
     <!-- to mobile topbar -->
     <div class="mobile-menu-content small-nav">
@@ -25,25 +30,26 @@
         <a class="nav-link {% if app.request.attributes.get("_route") == 'file_index' %} mobile-active{% endif %}"
            href='{{ url('file_index') }}'
            style="{% if is_granted('ROLE_LECTURER') or is_granted('ROLE_ADMIN') %}display:block{% else %}display:none{% endif %}">
-        ZARZĄDZANIE MATERIAŁAMI</a>
+            ZARZĄDZANIE MATERIAŁAMI</a>
         <a class="nav-link{% if app.request.attributes.get("_route") == 'show_all_lectures' %} mobile-active{% endif %}"
            href='{{ url('show_all_lectures') }}'
            style="{% if is_granted('ROLE_USER') or is_granted('ROLE_ADMIN') %}display:block{% else %}display:none{% endif %}">
-        PRZEGLĄDAJ WYKŁADY/KURSY</a>
+            PRZEGLĄDAJ WYKŁADY/KURSY</a>
         <a class="nav-link"
            href='{{ url('userPanel') }}'
            style="{% if is_granted('ROLE_USER') %}display:block{% else %}display:none{% endif %}">
             <span class="<{% if app.request.attributes.get("_route") == 'userPanel' %} mobile-active{% endif %}"
                   style="display:inline">PANEL UŻYTKOWNIKA</span> </a>
         <a class="nav-link"
-           href='{{ url('permManagement') }}'
+           href='{{ url('privilege_index') }}'
            style="{% if is_granted('ROLE_LECTURER') or is_granted('ROLE_ADMIN') %}display:block{% else %}display:none{% endif %}">
-            <span class="{% if app.request.attributes.get("_route") == 'permManagement'  %} mobile-active{% endif %}" style="display:inline">ZARZĄDZANIE UPRAWNIENIAMI</span>
+            <span class="{% if app.request.attributes.get("_route") == 'privilege_index' %} mobile-active{% endif %}"
+                  style="display:inline">ZARZĄDZANIE UPRAWNIENIAMI</span>
         </a>
-        <a class="nav-link{% if app.request.attributes.get("_route") == 'admin'  %} mobile-active{% endif %}"
+        <a class="nav-link{% if app.request.attributes.get("_route") == 'admin' %} mobile-active{% endif %}"
            href='{{ url('admin') }}'
            style="{% if is_granted('ROLE_ADMIN') %}display:block{% else %}display:none{% endif %}">
-        PANEL ADMINISTRATORA</a>
+            PANEL ADMINISTRATORA</a>
         {% if app.user %}
             <p></p>
             <p> Zalogowany jako: {{ app.user }}
@@ -73,74 +79,74 @@
 
 <!-- desktop navigation -->
 <div class="container-fluid" style="margin: 0; padding: 0;">
-<div class="row" style="margin: 0;">
-    <div class="col-md-2 col-sm-0 nav-left-site big-nav">
-        <div class="list-group nav flex-column">
-            <a class="nav-link list-group-item list-group-item-action{% if app.request.attributes.get("_route") == 'main'  %} active{% endif %}"
-               href='{{ url('main') }}'>
-                STRONA GŁÓWNA</a>
-            <a class="nav-link list-group-item list-group-item-action{% if app.request.attributes.get("_route") == 'file_index'  %} active{% endif %}"
-               href='{{ url('file_index') }}'
-               style="{% if is_granted('ROLE_LECTURER') or is_granted('ROLE_ADMIN') %}display:block{% else %}display:none{% endif %}">
-            ZARZĄDZANIE MATERIAŁAMI</a>
-            <a class="nav-link list-group-item list-group-item-action{% if app.request.attributes.get("_route") == 'show_all_lectures'  %} active{% endif %}"
-               href='{{ url('show_all_lectures') }}'
-               style="{% if is_granted('ROLE_USER') or is_granted('ROLE_ADMIN') %}display:block{% else %}display:none{% endif %}">
-            PRZEGLĄDAJ WYKŁADY/KURSY</a>
-            <a class="nav-link list-group-item list-group-item-action{% if app.request.attributes.get("_route") == 'permManagement'  %} active{% endif %}"
-               href='{{ url('permManagement') }}'
-               style="{% if is_granted('ROLE_LECTURER') or is_granted('ROLE_ADMIN') %}display:block{% else %}display:none{% endif %}">
-            ZARZĄDZANIE UPRAWNIENIAMI</a>
-            <a class="nav-link list-group-item list-group-item-action{% if app.request.attributes.get("_route") == 'userPanel'  %} active{% endif %}"
-               href='{{ url('userPanel') }}'
-               style="{% if is_granted('ROLE_USER') %}display:block{% else %}display:none{% endif %}">
-                PANEL UŻYTKOWNIKA</a>
-            <a class="nav-link list-group-item list-group-item-action{% if app.request.attributes.get("_route") == 'admin'  %} active{% endif %}"
-               href='{{ url('admin') }}'
-               style="{% if is_granted('ROLE_ADMIN') %}display:block{% else %}display:none{% endif %}">
-            PANEL ADMINISTRATORA</a>
+    <div class="row" style="margin: 0;">
+        <div class="col-md-2 col-sm-0 nav-left-site big-nav">
+            <div class="list-group nav flex-column">
+                <a class="nav-link list-group-item list-group-item-action{% if app.request.attributes.get("_route") == 'main' %} active{% endif %}"
+                   href='{{ url('main') }}'>
+                    STRONA GŁÓWNA</a>
+                <a class="nav-link list-group-item list-group-item-action{% if app.request.attributes.get("_route") == 'file_index' %} active{% endif %}"
+                   href='{{ url('file_index') }}'
+                   style="{% if is_granted('ROLE_LECTURER') or is_granted('ROLE_ADMIN') %}display:block{% else %}display:none{% endif %}">
+                    ZARZĄDZANIE MATERIAŁAMI</a>
+                <a class="nav-link list-group-item list-group-item-action{% if app.request.attributes.get("_route") == 'show_all_lectures' %} active{% endif %}"
+                   href='{{ url('show_all_lectures') }}'
+                   style="{% if is_granted('ROLE_USER') or is_granted('ROLE_ADMIN') %}display:block{% else %}display:none{% endif %}">
+                    PRZEGLĄDAJ WYKŁADY/KURSY</a>
+                <a class="nav-link list-group-item list-group-item-action{% if app.request.attributes.get("_route") == 'privilege_index' %} active{% endif %}"
+                   href='{{ url('privilege_index') }}'
+                   style="{% if is_granted('ROLE_LECTURER') or is_granted('ROLE_ADMIN') %}display:block{% else %}display:none{% endif %}">
+                    ZARZĄDZANIE UPRAWNIENIAMI</a>
+                <a class="nav-link list-group-item list-group-item-action{% if app.request.attributes.get("_route") == 'userPanel' %} active{% endif %}"
+                   href='{{ url('userPanel') }}'
+                   style="{% if is_granted('ROLE_USER') %}display:block{% else %}display:none{% endif %}">
+                    PANEL UŻYTKOWNIKA</a>
+                <a class="nav-link list-group-item list-group-item-action{% if app.request.attributes.get("_route") == 'admin' %} active{% endif %}"
+                   href='{{ url('admin') }}'
+                   style="{% if is_granted('ROLE_ADMIN') %}display:block{% else %}display:none{% endif %}">
+                    PANEL ADMINISTRATORA</a>
+            </div>
+            <div class="statistics">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-secondary"><strong>Liczba użytkowników:</strong></li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">Ogółem: <span
+                                class="badge badge-primary badge-pill">345</span></li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">Zalogowanych: <span
+                                class="badge badge-primary badge-pill">12</span></li>
+                    <li class="list-group-item list-group-item-secondary"><strong>Liczba pobrań:</strong></li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">dzień: <span
+                                class="badge badge-primary badge-pill">22</span></li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">miesiąc: <span
+                                class="badge badge-primary badge-pill">12</span></li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">semestr: <span
+                                class="badge badge-primary badge-pill">10</span></li>
+                </ul>
+            </div>
         </div>
-        <div class="statistics">
-            <ul class="list-group">
-                <li class="list-group-item list-group-item-secondary"><strong>Liczba użytkowników:</strong></li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">Ogółem: <span
-                            class="badge badge-primary badge-pill">345</span></li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">Zalogowanych: <span
-                            class="badge badge-primary badge-pill">12</span></li>
-                <li class="list-group-item list-group-item-secondary"><strong>Liczba pobrań:</strong></li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">dzień: <span
-                            class="badge badge-primary badge-pill">22</span></li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">miesiąc: <span
-                            class="badge badge-primary badge-pill">12</span></li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">semestr: <span
-                            class="badge badge-primary badge-pill">10</span></li>
-            </ul>
+        <div class="col-xl-10 col-sm-12 main-content">
+            {% block msg %}
+                {% for label, messages in app.session.flashbag.all %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ label }} flash-{{ label }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+            {% endblock %}
+            {% block body %}{{ content|raw }}{% endblock %}
         </div>
     </div>
-    <div class="col-md-10 col-sm-12 main-content">
-        {% block msg %}
-                        {% for label, messages in app.session.flashbag.all %}
-                        {% for message in messages %}
-                    <div class="alert alert-{{ label }} flash-{{ label }}">
-                        {{ message }}
-                    </div>
-                        {% endfor %}
-                        {% endfor %}
-                {% endblock %}
-        {% block body %}{{ dump(content) }}{% endblock %}
-    </div>
-</div>
-<footer>
-    <h5 class="text-center">Copyright ZUT {{ "now"|date("Y") }}</h5>
-</footer>
+    <footer>
+        <h5 class="text-center">Copyright ZUT {{ "now"|date("Y") }}</h5>
+    </footer>
 </div>
 {% block javascripts %}
-<script type="text/javascript">
-    /*
-    document.getElementsByTagName("div")[0].style.display = "none";
-    document.getElementsByTagName("div")[1].style.display = "none";
-    */
-</script>
+    <script type="text/javascript">
+        /*
+        document.getElementsByTagName("div")[0].style.display = "none";
+        document.getElementsByTagName("div")[1].style.display = "none";
+        */
+    </script>
 {% endblock %}
 </body>
 </html>

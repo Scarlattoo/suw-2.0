@@ -24,8 +24,6 @@ class User implements UserInterface, \Serializable
         return (string) $this->getUsername();
     }
 
-    const USER_ROLE = 'admin';
-
     /**
      * @var int
      *
@@ -40,6 +38,7 @@ class User implements UserInterface, \Serializable
      *
      * @ORM\Column(name="transcriptId", type="integer", unique=true)
      * @Assert\NotBlank
+     * @Assert\Type(type="integer", message="Numer indeksu musi być liczbą.", groups={"default"})
      */
     private $transcriptId;
 

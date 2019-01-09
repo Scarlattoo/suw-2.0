@@ -1,16 +1,8 @@
 {% extends 'base.html.twig' %}
-{% block title %}{{ parent() }} - Przeglądaj wykłady{% endblock %}
+{% block title %}{{ parent() }} - Przeglądaj wykłady dla kursu "{{ course }}"{% endblock %}
 {% block body %}
-    <h2>Wybierz kurs:</h2>
-    {% for course in courses %}
-        <a href="{{ path('show_course_lectures', {"course": course}) }}">
-            <button class="btn btn-primary" type="button">
-                {{ course }}
-            </button>
-        </a>
-    {% endfor %}
-    <h3>Lista udostępnionych wykładów</h3>
-    <table class="table table-striped">
+    <h3>Lista udostępnionych wykładów - kurs "{{ course }}"</h3>
+    <table class="table table-sm table-striped">
         <thead>
         <tr class="bg-primary text-white">
             <th>#</th>
@@ -35,10 +27,8 @@
                 <td>{{ file.time|date("d.m.Y H:i:s") }}</td>
                 <td>{{ file.type }}</td>
                 <td>{{ file.filename }}</td>
-                <td class="text-center">
-                    <a href="#" title="Wyświetl plik"><i class="far fa-eye fa-1x"></i></a>
-                    <a href="#" title="Pobierz plik" download><i class="fa fa-file-download fa-1x"></i></a>
-                </td>
+                <td class="text-center"><a href="#" title="Wyświetl plik"><i class="far fa-eye fa-1x"></i></a>
+                    <a href="#" title="Pobierz plik" download><i class="fa fa-file-download fa-1x"></i></a></td>
             </tr>
         {% endfor %}
         </tbody>

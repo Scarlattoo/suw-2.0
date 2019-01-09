@@ -26,11 +26,12 @@ class UserType extends AbstractType
             ->add('transcriptId', NumberType::class, array(
                 'label' => false,
                 'attr' => array('placeholder' => 'Twój numer indeksu'),
+                'invalid_message' => 'Numer indeksu musi być liczbą.'
             ))
             ->add('plainPassword', RepeatedType::class,array(
                 'type' => PasswordType::class,
                 'invalid_message' => 'Hasła muszą być takie same',
-                'first_options'  => array('attr' => array('placeholder' => 'Twoje hasło'), 'label' => false),
+                'first_options'  => array('attr' => array('placeholder' => 'Twoje hasło', 'maxlength' => 255), 'label' => false),
                 'second_options' => array('attr' => array('placeholder' => 'Powtórz hasło'), 'label' => false),
             ))
             ->add('Wyślij', SubmitType::class, array(

@@ -2,9 +2,11 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Entity\File;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -27,18 +29,18 @@ class FilesType extends AbstractType
         $user = $this->tokenStorage->getToken()->getUser();
         $courses=$user->getCourses()->getValues();
         $builder->add('lectureFile', FileType::class, array('label' => 'Wybierz plik PDF', 'attr' => array(),'required' => false, 'data_class' => null))
-            ->add('title',TextType::class, array('attr' => array(),'required' => false))
-            ->add('description',TextType::class, array('attr' => array(),'required' => false))
-            ->add('type',TextType::class, array('attr' => array()))
-            ->add('filename',TextType::class, array('attr' => array(),'required' => false))
-            ->add('course',EntityType::class, array('attr' => array(),'class' => 'AppBundle:Course','choices' => $courses));
+            ->add('title',TextType::class, array('label' => 'Tytuł','attr' => array('maxlength' => 255),'required' => false))
+            ->add('description',TextareaType::class, array('label' => 'Opis','attr' => array('maxlength' => 255),'required' => false))
+            ->add('type',TextType::class, array('label' => 'Typ','attr' => array('maxlength' => 255),'required' => false))
+            ->add('filename',TextType::class, array('label' => 'Nazwa pliku','attr' => array('maxlength' => 255),'required' => false))
+            ->add('course',EntityType::class, array('label' => 'Kurs','attr' => array(),'class' => 'AppBundle:Course','choices' => $courses));
     }/**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\File',
+            'data_class' => File::class,
         ));
     }
 
