@@ -40,12 +40,7 @@
            style="{% if is_granted('ROLE_USER') %}display:block{% else %}display:none{% endif %}">
             <span class="<{% if app.request.attributes.get("_route") == 'userPanel' %} mobile-active{% endif %}"
                   style="display:inline">PANEL UŻYTKOWNIKA</span> </a>
-        <a class="nav-link"
-           href='{{ url('privilege_index') }}'
-           style="{% if is_granted('ROLE_LECTURER') or is_granted('ROLE_ADMIN') %}display:block{% else %}display:none{% endif %}">
-            <span class="{% if app.request.attributes.get("_route") == 'privilege_index' %} mobile-active{% endif %}"
-                  style="display:inline">ZARZĄDZANIE UPRAWNIENIAMI</span>
-        </a>
+
         <a class="nav-link{% if app.request.attributes.get("_route") == 'admin' %} mobile-active{% endif %}"
            href='{{ url('admin') }}'
            style="{% if is_granted('ROLE_ADMIN') %}display:block{% else %}display:none{% endif %}">
@@ -93,10 +88,6 @@
                    href='{{ url('show_all_lectures') }}'
                    style="{% if is_granted('ROLE_USER') or is_granted('ROLE_ADMIN') %}display:block{% else %}display:none{% endif %}">
                     PRZEGLĄDAJ WYKŁADY/KURSY</a>
-                <a class="nav-link list-group-item list-group-item-action{% if app.request.attributes.get("_route") == 'privilege_index' %} active{% endif %}"
-                   href='{{ url('privilege_index') }}'
-                   style="{% if is_granted('ROLE_LECTURER') or is_granted('ROLE_ADMIN') %}display:block{% else %}display:none{% endif %}">
-                    ZARZĄDZANIE UPRAWNIENIAMI</a>
                 <a class="nav-link list-group-item list-group-item-action{% if app.request.attributes.get("_route") == 'userPanel' %} active{% endif %}"
                    href='{{ url('userPanel') }}'
                    style="{% if is_granted('ROLE_USER') %}display:block{% else %}display:none{% endif %}">
@@ -111,20 +102,9 @@
                     TEST WATERMARK</a>
             </div>
             <div class="statistics">
-                <ul class="list-group">
-                    <li class="list-group-item list-group-item-secondary"><strong>Liczba użytkowników:</strong></li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">Ogółem: <span
-                                class="badge badge-primary badge-pill">345</span></li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">Zalogowanych: <span
-                                class="badge badge-primary badge-pill">12</span></li>
-                    <li class="list-group-item list-group-item-secondary"><strong>Liczba pobrań:</strong></li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">dzień: <span
-                                class="badge badge-primary badge-pill">22</span></li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">miesiąc: <span
-                                class="badge badge-primary badge-pill">12</span></li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">semestr: <span
-                                class="badge badge-primary badge-pill">10</span></li>
-                </ul>
+                {% block statistics %}
+                    {{ render(controller('AppBundle:Main:stats')) }}
+                {% endblock %}
             </div>
         </div>
         <div class="col-xl-10 col-sm-12 main-content">

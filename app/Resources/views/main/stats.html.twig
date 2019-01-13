@@ -1,0 +1,19 @@
+<ul class="list-group">
+    <li class="list-group-item list-group-item-secondary"><strong>Liczba użytkowników:</strong></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">Ogółem: <span
+                class="badge badge-primary badge-pill">{{ stats.userCount }}</span></li>
+    <li class="list-group-item list-group-item-secondary"><strong>Wykłady:</strong></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">Liczba kursów: <span
+                class="badge badge-primary badge-pill">{{ stats.allCourses }}</span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">Liczba plików: <span
+                class="badge badge-primary badge-pill">{{ stats.allFiles }}</span></li>
+    <li class="list-group-item list-group-item-secondary"><strong>Liczba pobrań:</strong></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">dzień: <span
+                class="badge badge-primary badge-pill">{{ stats.todayDownloads }}</span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">miesiąc: <span
+                class="badge badge-primary badge-pill">{{ stats.monthDownloads }}</span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">rok: <span
+                class="badge badge-primary badge-pill">{{ stats.yearDownloads }}</span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">ogółem: <span
+                class="badge badge-primary badge-pill">{{ stats.allDownloads }}</span></li>
+</ul>
