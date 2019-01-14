@@ -1,10 +1,33 @@
 $box-shadow-color:  rgba(0, 0, 0, 0.2);
-$text-color-to-dark-menu: white;
+
+// nav 
+$default-nav-color: #007bff;
+$default-nav-text-color: white;
+$default-nav-desktop-active-background: #007bff;
+$default-nav-desktop-active-text-color: white;
+$default-nav-desktop-text-color: black;
+
+// statistics
+$statistics-badge-txt-color: white;
+$statistics-badge-bg-color: #007bff;
+
+// buttons
+$btn-light-color: white;
+$btn-light-color-txt: black;
+$btn-light-color-hover: #f8f9fa;
+$btn-light-color-txt-hover: black;
+
+$btn-primary-color: #007bff;
+$btn-primary-color-txt: white;
+$btn-primary-color-hover: #0069d9;
+$btn-primary-color-txt-hover: white;
+
+// bootstrap default color/primary is #007bff !
 
 html, body {
     height: 100%;
     width: 100%;
-    background: #FF;
+    background: #FFF;
 }
 
 .btn {
@@ -27,7 +50,7 @@ html, body {
     border-bottom: 3px solid #CDE700;
     border-top: 3px solid green;
     box-shadow: 1px 2px 3px $box-shadow-color;
-    color: $text-color-to-dark-menu;
+    color: $default-nav-text-color;
     position: -webkit-sticky;
     position: sticky;
     top: 0px;
@@ -37,7 +60,7 @@ html, body {
         font-size: 42px;
         padding: 10px;
         text-decoration: none;
-        color: $text-color-to-dark-menu;
+        color: $default-nav-text-color;
     }
 }
 
@@ -95,14 +118,13 @@ th a{
             display: block;
             padding: 10px;
             text-decoration: none;
-            color: $text-color-to-dark-menu;
+            color: $default-nav-text-color;
         }
 
         .btn-inline {
             display: inline-block;
             padding: 10px;
             text-decoration: none;
-            color: black;
         }
 
         label {
@@ -157,3 +179,55 @@ th a{
         margin-top: 15px;
     }
 }
+
+///// OVERWRITING BOOTSTRAP STYLES /////
+
+.text-primary {
+    color: $default-nav-text-color;
+}
+
+.bg-primary {
+    background-color: $default-nav-color!important;
+}
+
+.list-group-item {
+
+    color: $default-nav-desktop-text-color;
+
+    &.active {
+        background-color: $default-nav-desktop-active-background;
+        border-color: $default-nav-desktop-active-background;
+        color: $default-nav-desktop-active-text-color;
+    }
+}
+
+.badge-primary {
+    color: $statistics-badge-txt-color;
+    background-color: $statistics-badge-bg-color;
+}
+
+.btn-light {
+    color: $btn-light-color-txt;
+    background-color: $btn-light-color;
+    border-color: $btn-light-color;
+
+    &:hover{
+        color: $btn-light-color-txt-hover;
+        background-color: $btn-light-color-hover;
+        border-color: $btn-light-color-hover;    
+    }
+}
+
+.btn-primary {
+    color: $btn-primary-color-txt;
+    background-color: $btn-primary-color;
+    border-color: $btn-primary-color;
+
+    &:hover{
+        color: $btn-primary-color-txt-hover;
+        background-color: $btn-primary-color-hover;
+        border-color: $btn-primary-color-hover;
+    }
+}
+
+
