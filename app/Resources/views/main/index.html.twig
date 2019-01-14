@@ -17,4 +17,10 @@
             numeru albumu.
         </li>
     </ul>
+
+      <div class="statistics mobile">
+            {% block statistics %}
+                {{ render(controller('AppBundle:Main:stats')) }}
+            {% endblock %}
+        </div>
 {% endblock %}
