@@ -12,29 +12,28 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class UserType
+ * Class ChangePwd
  * @package AppBundle\Form
  */
-class UserType extends AbstractType
+class ChangePwd extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $builder->add('filledPassword', PasswordType::class, array(
+            'attr' => array('placeholder' => 'Twoje obecne hasło'),
+            'label' => false,
+        ));
         $builder
-            ->add('transcriptId', NumberType::class, array(
-                'label' => false,
-                'attr' => array('placeholder' => 'Twój numer indeksu'),
-                'invalid_message' => 'Numer indeksu musi być liczbą.'
-            ))
-            ->add('plainPassword', RepeatedType::class, array(
+            ->add('plainPassword', RepeatedType::class,array(
                 'type' => PasswordType::class,
                 'invalid_message' => 'Hasła muszą być takie same',
-                'first_options'  => array('attr' => array('placeholder' => 'Twoje hasło', 'maxlength' => 255), 'label' => false),
-                'second_options' => array('attr' => array('placeholder' => 'Powtórz hasło'), 'label' => false),
+                'first_options'  => array('attr' => array('placeholder' => 'Twoje nowe hasło', 'maxlength' => 255), 'label' => false),
+                'second_options' => array('attr' => array('placeholder' => 'Powtórz nowe hasło'), 'label' => false),
             ))
-            ->add('Wyślij', SubmitType::class, array(
+            ->add('Zmien haslo', SubmitType::class, array(
                 'attr' => array('class' => 'btn btn-primary'),
             ));
     }/**
