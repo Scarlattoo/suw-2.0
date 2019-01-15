@@ -22,7 +22,7 @@ class ChangePwd extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('password', PasswordType::class, array(
+        $builder->add('filledPassword', PasswordType::class, array(
             'attr' => array('placeholder' => 'Twoje obecne hasło'),
             'label' => false,
         ));
