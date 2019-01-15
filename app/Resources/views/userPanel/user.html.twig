@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ parent() }} - Panel Uzytkownika {% endblock %}
+{% block body %}
+    <div>
+        <h2>Panel użytkownika</h2>
+        Zalogowany jako: {{ app.user }}
+        
+        <hr>
+        <h5>Zmiana hasła</h5>
+        
+           <form name="passwordChangeForm" method="post">
+            <table>
+                <tbody>
+                <tr>
+                    <td>Obecne hasło:</td>
+                    <td><input type="password" name="passwordChangeOldPassword"></td>
+                </tr>
+                <tr>
+                    <td>Nowe hasło:</td>
+                    <td><input type="password" name="passwordChangeNewPassword"></td>
+                </tr>
+                <tr>
+                    <td>Powtórz nowe hasło:</td>
+                    <td><input type="password" name="passwordChangeNewPasswordRepeat"></td>
+                </tr>
+                </tbody>
+            </table>
+            <input class="btn btn-primary" type="submit" name="passwordChangeSubmit" value="Zmień">
+        </form>
+    </div>
+{% endblock %}
