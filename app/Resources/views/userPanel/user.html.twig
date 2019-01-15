@@ -1,5 +1,24 @@
 {% extends 'base.html.twig' %}
+{% form_theme form _self %}
 {% block title %}{{ parent() }} - Panel Uzytkownika {% endblock %}
+
+{% block form_errors %}
+    {% spaceless %}
+        {% if errors|length > 0 %}
+            <div class="alert alert-danger" style="display: inline-block">
+                {% for error in errors %}
+                    {{ error.message }}<br />
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endspaceless %}
+{% endblock form_errors %}
+{% block form_row %}
+    {{ form_label(form) }}
+    {{ form_errors(form) }}
+    {% if form.vars.valid == false %}{{ form_widget(form,{'attr':{'class':'form-control is-invalid'}}) }}{% else %}{{ form_widget(form) }}{% endif %}
+{% endblock %}
+
 {% block body %}
     <div>
         <h2>Panel użytkownika</h2>
@@ -7,25 +26,12 @@
         
         <hr>
         <h5>Zmiana hasła</h5>
-        
-           <form name="passwordChangeForm" method="post">
-            <table>
-                <tbody>
-                <tr>
-                    <td>Obecne hasło:</td>
-                    <td><input type="password" name="passwordChangeOldPassword"></td>
-                </tr>
-                <tr>
-                    <td>Nowe hasło:</td>
-                    <td><input type="password" name="passwordChangeNewPassword"></td>
-                </tr>
-                <tr>
-                    <td>Powtórz nowe hasło:</td>
-                    <td><input type="password" name="passwordChangeNewPasswordRepeat"></td>
-                </tr>
-                </tbody>
-            </table>
-            <input class="btn btn-primary" type="submit" name="passwordChangeSubmit" value="Zmień">
-        </form>
-    </div>
+
+        {{ form_start(form) }}
+            <div class="form-group">{{ form_row(form.password) }}</div>
+            <div class="form-group">{{ form_row(form.plainPassword.first) }}</div>
+            <div class="form-group">{{ form_row(form.plainPassword.second) }}</div>
+        {{ form_end(form) }} 
+
+    </div> 
 {% endblock %}
