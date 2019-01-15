@@ -1,5 +1,4 @@
 <?php
-
 namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -34,9 +33,23 @@ class WatermarkController extends Controller
 
         $this->createTestFileRecord();
         $file_name = 'test_file.pdf';
-        $this->add_watermark($file_name);
+        $password = strval(rand(1000, 9999));
+        $date = date('Y-m-d H:i:s');
+        $client_ip = $request->getClientIp();
+        $user = $this->getUser();
+        $text = join("\n\n", array($user, $date, $client_ip));
+        $courses = $this->getCourseNames();
+        $pdf = $this->add_watermark($file_name, $text, $password);
+        $file_abspath = $this->getFileAbspath($file_name);
 
-        return $this->render('base.html.twig', array('content' => $external_packages_path));
+        // return $this->render('base.html.twig', array('content' => $external_packages_path));
+        return $this->render('download/download.html.twig', array(
+            'courses_names' => $courses,
+            'password' => $password,
+            'file' => $file_name,
+            'pdf' => $pdf,
+            'file_abspath' => $file_abspath
+        ));
     }
 
     private function createTestFileRecord() {
@@ -58,18 +71,27 @@ class WatermarkController extends Controller
         }
     }
 
+    private function getCourseNames(){
+        $coursesRepo = $this->getDoctrine()->getRepository('AppBundle:Course');
+        $courses = $coursesRepo->findAll();
+        $courses_names = array();
+        foreach ($courses as $course){
+            array_push($courses_names, $course->getName());
+        }
+        return $courses_names;
+
+    }
+
     private function getFileAbspath($file_name){
         $storage_path = realpath(__dir__."/../../../storage");
         $file_path = $storage_path."/".$file_name;
         return $file_path;
     }
 
-    private function add_watermark($file_name)
+    private function add_watermark($file_name, $text, $password)
     {   
         $pdf =  new \setasign\FpdiProtection\FpdiProtection();
-        $waterm_text = 'MARKED: ZUT';
         $file = $this->getFileAbspath($file_name);
-        $pdf_password = '1234';
         try {
             $page_count = $pdf->setSourceFile($file);
         } catch (Exception $pdfp_e) {
@@ -85,21 +107,22 @@ class WatermarkController extends Controller
             $page_width = (int)$size['width'];
             $page_height = (int)$size['height'];
             $pdf->addPage($page_orient);
-            $pdf->SetFont('Times', 'I', 30);
+            $pdf->SetFont('Times', 'I', 20);
             $pdf->SetTextColor(206, 204, 204);
-            $text_x_pos = ceil((20 / 100) * $page_width); // Watermark position: % of page width, % of page height
-            $text_y_pos = ceil((10 / 100) * $page_height);
+            $text_x_pos = ceil((5 / 100) * $page_width); // Watermark position: % of page width, % of page height
+            $text_y_pos = ceil((80 / 100) * $page_height);
             $pdf->SetXY($text_x_pos, $text_y_pos);
-            $pdf->Write(0, $waterm_text);
+            $pdf->Write(4, $text);
             $pdf->useTemplate($page_templ);
         }
-        $pdf->SetProtection(array(), $pdf_password);
-        $this->DownloadFile($file, $pdf);
-        return;
+        $pdf->SetProtection(array(), $password);
+        // $this->DownloadFile($file, $pdf);
+        return $pdf;
     }
 
     private function DownloadFile($file, $pdf){
-        $pdf->Output('D', $file);
+        $pdf->Output('I', $file);
+        return;
     }
 
 }
