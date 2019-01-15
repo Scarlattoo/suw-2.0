@@ -1,12 +1,10 @@
 {% extends 'base.html.twig' %}
 {% block title %}{{ parent() }} - Przeglądaj wykłady{% endblock %}
 {% block body %}
-    <h2>Wybierz kurs:</h2>
+    <h3>Wybierz kurs:</h3>
     {% for course in courses %}
-        <a href="{{ path('show_course_lectures', {"course": course}) }}">
-            <button class="btn btn-primary" type="button">
+        <a class="btn btn-sm btn-primary mt-0 ml-0" href="{{ path('show_course_lectures', {"course": course}) }}">
                 {{ course }}
-            </button>
         </a>
     {% endfor %}
     <h3>Lista udostępnionych wykładów</h3>
@@ -43,5 +41,4 @@
         {% endfor %}
         </tbody>
     </table>
-    <a class="btn btn-primary" href="{{ path('show_all_lectures') }}">Powrót do pełnej listy</a>
 {% endblock %}

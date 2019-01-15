@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>File</h1>
+    <h2>Podgląd pliku</h2>
 
     <table class="table table-sm table-striped">
         <tbody>
@@ -35,9 +35,7 @@
             </tr>
         </tbody>
     </table>
-            <a class="btn btn-primary" href="{{ path('file_index') }}">Powrót</a>
-            <a class="btn btn-primary" href="{{ path('file_edit', { 'id': file.id }) }}">Edytuj</a>
-            {#{{ path }}#}
-        </li>
-    </ul>
+            <a class="btn btn-primary mt-0 ml-0" href="{{ path('file_index') }}">Powrót</a>
+            <a class="btn btn-success mt-0 ml-0" href="{{ path('file_edit', { 'id': file.id }) }}">Edytuj</a>
+            <a class="btn btn-warning mt-0 ml-0" href="{{ path('file_privilege', { 'fileId': file.id }) }}">Udostępnij studentom</a>
 {% endblock %}

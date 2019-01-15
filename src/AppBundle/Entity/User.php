@@ -60,13 +60,7 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(name="password", type="string", length=100)
      */
     private $password;
-  
-    /**
-     * @Assert\NotBlank
-     * @Assert\Length(max=4096)
-     */
-    private $filledPassword;
-
+    
     /**
      * @var \DateTime
      *
@@ -280,14 +274,4 @@ class User implements UserInterface, \Serializable
         $this->plainPassword = null;
     }
 
-    public function setFilledPassword($filledPassword) 
-    {
-        $this->filledPassword = $filledPassword;
-
-        return $this;
-    }
-
-    public function getFilledPassword() {
-        return $this->filledPassword;
-    }
 }

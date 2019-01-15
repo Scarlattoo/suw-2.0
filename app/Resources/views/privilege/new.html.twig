@@ -1,18 +1,24 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h2>Nadawanie uprawnień do odczytu dla pliku "{{ file.title }}" ({{ file.filename }})</h2>
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Nadaj" />
-    {{ form_end(form) }}
-    <h2>Nadane uprawnienia:</h2>
-    <table class="table table-sm table-striped">
+    <h2>Nadawanie uprawnień do odczytu dla pliku:</h2>
+    <h4>{% if file.title %}"{{ file.title }}"{% endif %} ({{ file.filename }})</h4>
+    {% if form.user.vars.choices %}
+        {{ form(form) }}
+{% else %}
+        <div class="alert alert-warning" role="alert">
+            <strong>Wszyscy uzytkownicy mają nadane uprawnienia do tego pliku.</strong>
+        </div>
+    {% endif %}
+    <h3>Nadane uprawnienia:</h3>
+    {% if privileges %}
+        <div class="col-md-3">
+        <table class="table table-sm table-striped">
         <thead>
         <tr class="bg-primary text-white">
             <th scope="col">#</th>
             <th scope="col">Nr indeksu</th>
-            <th scope="col">Akcje</th>
+            <th scope="col"></th>
         </tr>
         </thead>
         <tbody>
@@ -21,10 +27,17 @@
                 <td scope="row">{{ loop.index }}</td>
                 <td scope="row">{{ privilege.user.transcriptId }}</td>
                 <td scope="row">
-                    <a href="{{ path('privilege_delete', { 'privilegeId': privilege.id }) }}">usuń</a>
+                    <a class="btn btn-sm btn-danger m-0" href="{{ path('privilege_delete', { 'privilegeId': privilege.id }) }}">usuń</a>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+        </div>
+    {% else %}
+        <div class="alert alert-warning" role="alert">
+            <strong>brak nadanych uprawnień</strong>
+        </div>
+    {% endif %}
+    <a class="btn btn-primary ml-0 mt-0" href="{{ path('file_edit', {'id':file.id}) }}">Powrót do edycji pliku</a>
 {% endblock %}

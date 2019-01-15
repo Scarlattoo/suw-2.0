@@ -17,12 +17,11 @@
 
 {% block body %}
     <h1>Edycja pliku</h1>
-
     {{ form_start(edit_form) }}
     {{ form_widget(edit_form) }}
-    <input class="btn btn-warning" type="submit" value="Zapisz zmiany"/>
+    <a class="btn btn-primary mt-0 ml-0" href="{{ path('file_index') }}">Powrót do listy</a>
+    <input class="btn btn-success mt-0 ml-0" type="submit" value="Zapisz zmiany"/>
+    <a class="btn btn-warning mt-0 ml-0" href="{{ path('file_privilege', { 'fileId': file.id }) }}">Udostępnij studentom</a>
+    <a class="btn btn-danger mt-0 ml-0" href="{{ path('file_delete',{ 'id': file.id}) }}">Usuń</a>
     {{ form_end(edit_form) }}
-    <a class="btn btn-primary" href="{{ path('file_index') }}">Powrót do listy</a>
-    <a class="btn btn-success" href="{{ path('file_privilege', { 'fileId': file.id }) }}">Udostępnij studentom</a>
-    <a class="btn btn-danger" href="{{ path('file_delete',{ 'id': file.id}) }}">Usuń</a>
 {% endblock %}

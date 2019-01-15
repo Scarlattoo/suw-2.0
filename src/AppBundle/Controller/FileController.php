@@ -207,26 +207,45 @@ class FileController extends Controller
      * @Route("/nadaj_uprawnienia/{fileId}", name="file_privilege")
      * @Method({"GET", "POST"})
      */
-    public function listAction(Request $request, $fileId)
+    public function listPrivilegeAction(Request $request, $fileId)
     {
         $privilege = new Privilege();
         $file = $this->getDoctrine()->getRepository('AppBundle:File')->find($fileId);
         $privilege->setFile($file);
         $privilege->setClearanceLevel(false);
-        $privileges = $this->getDoctrine()->getRepository('AppBundle:Privilege')->findByFile($fileId);
-//        $privileges = $this->get('doctrine.orm.entity_manager')
-//            ->createQuery('SELECT U.transcriptId
-//            FROM AppBundle:Privilege P
-//            JOIN AppBundle:User U
-//            WITH P.user = U
-//            AND P.file = :file')
-//            ->setParameter('file', $file)
-//            ->getResult();
-//        $users = $this->get('doctrine.orm.entity_manager')->createQuery('SELECT u.transcriptId FROM AppBundle:User u')->getResult();
-//        $choice = \array_diff($privileges,$users); //WTF
-        $form = $this->createForm('AppBundle\Form\PrivilegeType', $privilege,array('choices' => null));
+        $ExistingFilePrivileges = $this->getDoctrine()->getRepository('AppBundle:Privilege')->findByFile($fileId);
+        $privilegesRepo = $this->getDoctrine()->getRepository('AppBundle:User');
+        if (empty($ExistingFilePrivileges)) {
+            $qb = $privilegesRepo->createQueryBuilder('U');
+            $choices = $qb->select('U.id, U.transcriptId')
+                ->getQuery()
+                ->getResult();
+        } else {
+            foreach ($ExistingFilePrivileges as $filePrivilege) {
+                $filePrivileges[] = $filePrivilege->getUser();
+            }
+            $qb = $privilegesRepo->createQueryBuilder('U');
+            $choices = $qb->select('U.id, U.transcriptId')
+                ->distinct()
+                ->join('AppBundle:Privilege', 'P')
+                ->Where('P.file = :file')
+                ->andWhere('U NOT IN (:filePrivileges)')
+                ->setParameter('file', $file)
+                ->setParameter('filePrivileges', $filePrivileges)
+                ->getQuery()
+                ->getResult();
+        }
+        if (!empty($choices)) {
+            foreach ($choices as $choice) {
+                $UserChoices[$choice['id']] = $choice['transcriptId'];
+            }
+        } else {
+            $UserChoices=null;
+        }
+        $form = $this->createForm('AppBundle\Form\PrivilegeType', $privilege, array('choices' => $UserChoices));
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $privilege->setUser($privilegesRepo->find($form->getData()->getUser()));
             $em = $this->getDoctrine()->getManager();
             $em->persist($privilege);
             $em->flush();
@@ -235,7 +254,7 @@ class FileController extends Controller
 
         return $this->render('privilege/new.html.twig', array(
             'file' => $file,
-            'privileges' => $privileges,
+            'privileges' => $ExistingFilePrivileges,
             'form' => $form->createView(),
         ));
     }

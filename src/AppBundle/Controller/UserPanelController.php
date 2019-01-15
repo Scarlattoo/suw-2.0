@@ -26,7 +26,7 @@ class UserPanelController extends Controller
      
         if ($form->isSubmitted() && $form->isValid()) {
 
-            if (password_verify($user->getFilledPassword(), $oldPassword)){
+            if (password_verify($user->getPassword(), $oldPassword)){
                 $password = $this->get('security.password_encoder')
                 ->encodePassword($user, $user->getPlainPassword());
                 $user->setPassword($password);
@@ -42,7 +42,7 @@ class UserPanelController extends Controller
             }
             
                 $this->addFlash('danger','Obecne hasło niepoprawne!');
-                return $this->redirectToRoute('main');
+                return $this->redirectToRoute('userPanel');
          }
    
          return $this->render('userPanel/user.html.twig', array(

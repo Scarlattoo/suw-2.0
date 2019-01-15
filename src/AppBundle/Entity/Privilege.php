@@ -3,12 +3,19 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Privilege
  *
  * @ORM\Table(name="privilege")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\PrivilegeRepository")
+ * @UniqueEntity(
+ *     fields={"user","file"},
+ *     errorPath="user",
+ *     message="Użytkownik już posiada uprawnienia do tego pliku."
+ *     )
  */
 class Privilege
 {
@@ -32,6 +39,9 @@ class Privilege
      * @var int
      * @ORM\ManyToOne(targetEntity="User", inversedBy="privileges")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
+     * @Assert\NotBlank(message="Musisz wybrać użytkownika do nadania uprawnień.")
+     * @Assert\Type("integer")
+
      */
     private $user;
 
@@ -39,6 +49,7 @@ class Privilege
      * @var int
      * @ORM\ManyToOne(targetEntity="File")
      * @ORM\JoinColumn(name="file_id", referencedColumnName="id", onDelete="CASCADE")
+     * @Assert\NotBlank
      */
     private $file;
 
@@ -124,4 +135,10 @@ class Privilege
     {
         return $this->file;
     }
+
+    public function __toString()
+    {
+        return (string) $this->getId();
+    }
+
 }
