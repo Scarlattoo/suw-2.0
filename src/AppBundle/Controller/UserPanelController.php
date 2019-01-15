@@ -18,6 +18,7 @@ class UserPanelController extends Controller
     {
 
         $user = $this->getUser();
+        $oldPassword = $user->getPassword();
 
         $form = $this->createForm(ChangePwd::class, $user);
         $form->handleRequest($request);
@@ -25,13 +26,7 @@ class UserPanelController extends Controller
      
         if ($form->isSubmitted() && $form->isValid()) {
 
-            // $encoder = $this->container->get('security.encoder_factory')->getEncoder($user);
-            // $old_pwd_encoded = $encoder->encodePassword($user->getFilledPassword(), $user->getSalt());
-
-            $old_pwd_encoded = $this->get('security.password_encoder')
-            ->encodePassword($user, $user->getFilledPassword());
-
-            if ($old_pwd_encoded = $user->getPassword() ){
+            if (password_verify($user->getFilledPassword(), $oldPassword)){
                 $password = $this->get('security.password_encoder')
                 ->encodePassword($user, $user->getPlainPassword());
                 $user->setPassword($password);
