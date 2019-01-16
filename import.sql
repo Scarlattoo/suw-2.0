@@ -1,225 +1,244 @@
+SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 
-INSERT INTO `course` (`id`, `user_id`, `name`) VALUES
-(1, 2, 'PAIP'),
-(2, 3, 'PSIAI'),
-(3, 3, 'Podstawy teleinformatyki'),
-(4, 2, 'Jakis Kurs'),
-(5, 2, 'Drugi kurs'),
-(6, 3, 'Podstawy podstaw'),
-(7, 3, 'Podstawy Zaawansowania'),
-(8, 3, 'Zaawansowany Kurs Nic-nie-robienia'),
-(9, 2, 'Kurs Kursowania'),
-(10, 2, 'Zaawansowany Kurs'),
-(11, 3, 'Kurs kursora');
+INSERT INTO `course` VALUES(1, 2, 'PAIP');
+INSERT INTO `course` VALUES(2, 3, 'PSIAI');
+INSERT INTO `course` VALUES(3, 3, 'Podstawy teleinformatyki');
+INSERT INTO `course` VALUES(4, 2, 'Jakis Kurs');
+INSERT INTO `course` VALUES(5, 2, 'Drugi kurs');
+INSERT INTO `course` VALUES(6, 3, 'Podstawy podstaw');
+INSERT INTO `course` VALUES(7, 3, 'Podstawy Zaawansowania');
+INSERT INTO `course` VALUES(9, 2, 'Kurs Kursowania');
+INSERT INTO `course` VALUES(10, 2, 'Zaawansowany Kurs');
+INSERT INTO `course` VALUES(11, 3, 'Kurs kursorów');
 
-INSERT INTO `download` (`id`, `user_id`, `file_id`, `time`, `ip`) VALUES
-(4, 6, 2, '2018-11-19 18:51:22', '192.168.0.234'),
-(5, 6, 5, '2018-11-21 02:38:52', '192.168.1.3'),
-(6, 7, 2, '2018-11-21 02:38:59', '127.0.0.1'),
-(8, 6, 5, '2018-11-21 02:39:20', '127.0.0.1'),
-(10, 7, 2, '2018-11-21 02:39:22', '192.168.1.3'),
-(11, 5, 1, '2018-11-21 02:39:22', '192.168.1.3'),
-(12, 6, 5, '2018-11-21 03:39:22', '192.168.1.3'),
-(14, 5, 2, '2018-11-21 06:39:22', '192.168.1.3'),
-(15, 7, 1, '2018-11-21 02:39:22', '192.168.1.3'),
-(16, 6, 2, '2018-11-21 04:39:22', '192.168.1.3'),
-(17, 6, 5, '2018-11-21 08:39:22', '192.168.1.3'),
-(19, 5, 2, '2018-11-21 12:39:22', '192.168.1.3'),
-(23, 6, 1, '2018-11-27 17:29:49', '::1'),
-(24, 6, 1, '2018-11-27 17:30:19', '::1'),
-(25, 6, 1, '2018-11-27 17:30:33', '::1'),
-(26, 6, 1, '2018-11-27 17:33:29', '::1'),
-(27, 6, 1, '2018-11-27 17:33:30', '::1'),
-(28, 6, 1, '2018-11-27 17:33:57', '::1'),
-(29, 6, 1, '2018-11-27 17:35:14', '::1'),
-(30, 6, 1, '2018-11-27 17:35:14', '::1'),
-(31, 6, 1, '2018-11-27 17:35:26', '::1'),
-(32, 6, 1, '2018-11-27 17:36:08', '::1'),
-(33, 6, 1, '2018-11-27 17:36:09', '::1'),
-(34, 6, 1, '2018-11-27 17:36:55', '::1'),
-(35, 6, 1, '2018-11-27 17:36:55', '::1'),
-(36, 6, 1, '2018-11-27 17:45:13', '::1'),
-(37, 6, 1, '2018-11-27 17:46:26', '::1'),
-(38, 6, 1, '2018-11-27 17:47:14', '::1'),
-(39, 6, 1, '2018-11-27 17:47:25', '::1'),
-(40, 6, 1, '2018-11-27 17:49:02', '::1'),
-(41, 6, 1, '2018-11-27 17:49:03', '::1'),
-(42, 6, 1, '2018-11-27 17:49:18', '::1'),
-(43, 6, 1, '2018-11-27 17:50:45', '::1'),
-(44, 6, 1, '2018-11-27 17:51:05', '::1'),
-(45, 6, 1, '2018-11-27 17:51:23', '::1'),
-(46, 6, 1, '2018-11-27 17:51:35', '::1'),
-(47, 6, 1, '2018-11-27 17:54:08', '::1'),
-(48, 6, 1, '2018-11-27 17:54:29', '::1'),
-(49, 6, 1, '2018-11-27 17:55:28', '::1'),
-(50, 6, 1, '2018-11-27 17:56:13', '::1'),
-(51, 6, 1, '2018-11-27 17:58:28', '::1'),
-(52, 6, 1, '2018-11-27 17:58:29', '::1'),
-(53, 6, 1, '2018-11-27 17:58:29', '::1'),
-(54, 6, 1, '2018-11-27 17:58:30', '::1'),
-(55, 6, 1, '2018-11-27 17:59:11', '::1'),
-(56, 6, 1, '2018-11-27 17:59:28', '::1'),
-(57, 6, 1, '2018-11-27 18:00:12', '::1'),
-(58, 6, 1, '2018-11-27 18:00:14', '::1'),
-(59, 6, 1, '2018-11-27 18:00:35', '::1'),
-(60, 6, 1, '2018-11-27 18:00:36', '::1'),
-(61, 6, 1, '2018-11-27 18:00:36', '::1'),
-(62, 6, 1, '2018-11-27 18:00:55', '::1'),
-(63, 6, 1, '2018-11-27 18:00:56', '::1'),
-(64, 1, 1, '2018-11-27 18:01:56', '::1'),
-(65, 1, 1, '2018-11-27 18:02:25', '::1'),
-(66, 1, 1, '2018-11-27 18:03:31', '::1'),
-(67, 1, 1, '2018-11-27 18:05:37', '::1'),
-(68, 1, 1, '2018-11-27 18:05:38', '::1'),
-(69, 1, 1, '2018-11-27 18:05:45', '::1'),
-(70, 1, 1, '2018-11-27 18:06:05', '::1'),
-(71, 1, 1, '2018-11-27 18:06:06', '::1'),
-(72, 1, 1, '2018-11-27 18:06:06', '::1'),
-(73, 1, 1, '2018-11-27 18:06:06', '::1'),
-(74, 1, 1, '2018-11-27 18:06:06', '::1'),
-(75, 1, 1, '2018-11-27 18:06:07', '::1'),
-(76, 1, 1, '2018-11-27 18:06:07', '::1'),
-(77, 1, 1, '2018-11-27 18:06:07', '::1'),
-(78, 1, 1, '2018-11-27 18:07:37', '::1'),
-(79, 1, 1, '2018-11-27 18:07:38', '::1'),
-(80, 1, 1, '2018-11-27 18:07:38', '::1'),
-(81, 1, 1, '2018-11-27 18:07:39', '::1'),
-(82, 1, 1, '2018-11-27 18:07:39', '::1'),
-(83, 1, 1, '2018-11-27 18:08:23', '::1'),
-(84, 1, 1, '2018-11-27 18:09:21', '::1'),
-(85, 1, 1, '2018-11-27 18:09:22', '::1'),
-(86, 1, 1, '2018-11-27 18:09:22', '::1'),
-(87, 1, 1, '2018-11-27 18:09:22', '::1'),
-(88, 1, 1, '2018-11-27 18:09:27', '::1'),
-(89, 1, 1, '2018-11-27 18:10:45', '::1'),
-(93, 6, 1, '2018-11-27 18:11:22', '::1'),
-(96, 6, 1, '2018-11-27 18:12:39', '::1'),
-(97, 6, 1, '2018-11-27 18:13:03', '::1'),
-(100, 6, 1, '2018-11-27 18:14:28', '::1'),
-(101, 6, 1, '2018-11-27 18:14:52', '::1'),
-(102, 6, 1, '2018-11-27 18:15:49', '::1'),
-(103, 6, 1, '2018-11-27 18:17:45', '::1'),
-(104, 6, 1, '2018-11-27 18:17:46', '::1'),
-(105, 6, 1, '2018-11-27 18:17:46', '::1'),
-(106, 6, 1, '2018-11-27 18:17:46', '::1'),
-(108, 6, 1, '2018-11-27 18:18:03', '::1'),
-(109, 6, 1, '2018-11-27 18:18:58', '::1'),
-(110, 6, 1, '2018-11-27 18:18:59', '::1'),
-(111, 6, 1, '2018-11-27 18:18:59', '::1'),
-(112, 6, 1, '2018-11-27 18:18:59', '::1'),
-(113, 6, 1, '2018-11-27 18:18:59', '::1'),
-(114, 6, 2, '2018-11-27 18:19:04', '::1'),
-(115, 6, 2, '2018-11-27 18:19:06', '::1'),
-(116, 6, 2, '2018-11-27 18:19:06', '::1'),
-(117, 6, 2, '2018-11-27 18:19:06', '::1'),
-(118, 6, 2, '2018-11-27 18:19:06', '::1'),
-(119, 6, 2, '2018-11-27 18:19:06', '::1'),
-(120, 6, 2, '2018-11-27 18:19:06', '::1'),
-(121, 6, 2, '2018-11-27 18:19:07', '::1'),
-(122, 6, 2, '2018-11-27 18:20:05', '::1'),
-(123, 6, 2, '2018-11-27 18:20:06', '::1'),
-(124, 6, 2, '2018-11-27 18:20:06', '::1'),
-(125, 6, 2, '2018-11-27 18:20:06', '::1'),
-(126, 6, 2, '2018-11-27 18:20:06', '::1'),
-(127, 6, 2, '2018-11-27 18:20:06', '::1'),
-(128, 6, 2, '2018-11-27 18:20:07', '::1'),
-(129, 6, 2, '2018-11-27 18:20:07', '::1'),
-(130, 6, 2, '2018-11-27 18:20:13', '::1'),
-(131, 6, 2, '2018-11-27 18:20:51', '::1'),
-(132, 6, 2, '2018-11-27 18:20:52', '::1'),
-(133, 6, 2, '2018-11-27 18:20:52', '::1'),
-(134, 6, 2, '2018-11-27 18:20:52', '::1'),
-(135, 6, 2, '2018-11-27 18:21:00', '::1'),
-(136, 6, 2, '2018-11-27 18:21:00', '::1'),
-(137, 6, 2, '2018-11-27 18:21:01', '::1'),
-(138, 6, 2, '2018-11-27 18:21:23', '::1'),
-(139, 6, 2, '2018-11-27 18:21:30', '::1'),
-(140, 6, 2, '2018-11-27 18:21:31', '::1'),
-(141, 6, 2, '2018-11-27 18:22:34', '::1'),
-(142, 6, 2, '2018-11-27 18:22:35', '::1'),
-(143, 6, 2, '2018-11-27 18:22:36', '::1'),
-(144, 6, 2, '2018-11-27 18:22:36', '::1'),
-(145, 6, 2, '2018-11-27 18:22:36', '::1'),
-(146, 6, 2, '2018-11-27 18:22:36', '::1'),
-(147, 6, 2, '2018-11-27 18:22:37', '::1'),
-(148, 6, 2, '2018-11-27 18:22:37', '::1'),
-(149, 6, 2, '2018-11-27 18:23:03', '::1'),
-(150, 6, 2, '2018-11-27 18:23:03', '::1'),
-(151, 6, 2, '2018-11-27 18:23:03', '::1'),
-(152, 6, 2, '2018-11-27 18:23:04', '::1'),
-(153, 6, 2, '2018-11-27 18:23:04', '::1'),
-(154, 6, 2, '2018-11-27 18:23:10', '::1'),
-(155, 6, 2, '2018-11-27 18:23:32', '::1'),
-(156, 6, 2, '2018-11-27 18:23:33', '::1'),
-(157, 6, 2, '2018-11-27 18:23:33', '::1'),
-(158, 6, 2, '2018-11-27 18:23:33', '::1'),
-(159, 6, 2, '2018-11-27 18:23:33', '::1'),
-(160, 6, 2, '2018-11-27 18:23:48', '::1'),
-(161, 6, 2, '2018-11-27 18:23:54', '::1'),
-(162, 6, 2, '2018-11-27 18:23:55', '::1'),
-(163, 6, 2, '2018-11-27 18:23:55', '::1'),
-(164, 6, 2, '2018-11-27 18:23:55', '::1'),
-(165, 6, 2, '2018-11-27 18:23:56', '::1'),
-(166, 6, 2, '2018-11-27 18:23:56', '::1'),
-(167, 6, 2, '2018-11-27 18:23:56', '::1'),
-(168, 6, 1, '2018-11-27 18:23:59', '::1'),
-(169, 6, 1, '2018-11-27 18:24:09', '::1'),
-(170, 6, 1, '2018-11-27 18:24:10', '::1'),
-(171, 6, 1, '2018-11-27 18:24:10', '::1'),
-(172, 6, 1, '2018-11-27 18:24:10', '::1'),
-(173, 6, 1, '2018-11-27 18:24:15', '::1'),
-(175, 6, 1, '2018-11-27 18:24:24', '::1'),
-(176, 6, 1, '2018-11-27 18:24:56', '::1'),
-(177, 6, 1, '2018-11-27 18:24:57', '::1'),
-(178, 6, 1, '2018-11-27 18:24:57', '::1'),
-(179, 6, 1, '2018-11-27 18:24:57', '::1'),
-(180, 6, 1, '2018-11-27 18:24:58', '::1'),
-(181, 6, 1, '2018-11-27 18:24:58', '::1'),
-(183, 6, 1, '2018-11-27 18:25:44', '::1'),
-(184, 6, 1, '2018-11-27 18:26:40', '::1'),
-(185, 6, 1, '2018-11-27 18:27:00', '::1'),
-(186, 6, 1, '2018-11-27 18:27:02', '::1'),
-(187, 6, 1, '2018-11-27 18:27:17', '::1'),
-(188, 6, 2, '2018-11-27 18:27:28', '::1'),
-(189, 6, 2, '2018-11-27 18:27:42', '::1'),
-(190, 6, 2, '2018-11-27 18:28:38', '::1'),
-(191, 6, 1, '2018-11-27 18:37:55', '::1'),
-(192, 7, 5, '2018-11-27 19:00:43', '::1'),
-(193, 7, 5, '2018-11-27 19:00:54', '::1'),
-(195, 1, 1, '2018-11-28 02:32:53', '::1'),
-(196, 6, 1, '2018-11-28 02:33:27', '::1'),
-(197, 6, 1, '2018-11-28 02:33:32', '::1'),
-(198, 6, 1, '2018-12-03 12:26:47', '::1'),
-(199, 6, 1, '2018-12-03 12:27:20', '::1');
+INSERT INTO `download` VALUES(4, 6, 2, '2018-11-19 18:51:22', '192.168.0.234');
+INSERT INTO `download` VALUES(5, 6, 5, '2018-11-21 02:38:52', '192.168.1.3');
+INSERT INTO `download` VALUES(6, 7, 2, '2018-11-21 02:38:59', '127.0.0.1');
+INSERT INTO `download` VALUES(8, 6, 5, '2018-11-21 02:39:20', '127.0.0.1');
+INSERT INTO `download` VALUES(10, 7, 2, '2018-11-21 02:39:22', '192.168.1.3');
+INSERT INTO `download` VALUES(11, 5, 1, '2018-11-21 02:39:22', '192.168.1.3');
+INSERT INTO `download` VALUES(12, 6, 5, '2018-11-21 03:39:22', '192.168.1.3');
+INSERT INTO `download` VALUES(14, 5, 2, '2018-11-21 06:39:22', '192.168.1.3');
+INSERT INTO `download` VALUES(15, 7, 1, '2018-11-21 02:39:22', '192.168.1.3');
+INSERT INTO `download` VALUES(16, 6, 2, '2018-11-21 04:39:22', '192.168.1.3');
+INSERT INTO `download` VALUES(17, 6, 5, '2018-11-21 08:39:22', '192.168.1.3');
+INSERT INTO `download` VALUES(19, 5, 2, '2018-11-21 12:39:22', '192.168.1.3');
+INSERT INTO `download` VALUES(23, 6, 1, '2018-11-27 17:29:49', '::1');
+INSERT INTO `download` VALUES(24, 6, 1, '2018-11-27 17:30:19', '::1');
+INSERT INTO `download` VALUES(25, 6, 1, '2018-11-27 17:30:33', '::1');
+INSERT INTO `download` VALUES(26, 6, 1, '2018-11-27 17:33:29', '::1');
+INSERT INTO `download` VALUES(27, 6, 1, '2018-11-27 17:33:30', '::1');
+INSERT INTO `download` VALUES(28, 6, 1, '2018-11-27 17:33:57', '::1');
+INSERT INTO `download` VALUES(29, 6, 1, '2018-11-27 17:35:14', '::1');
+INSERT INTO `download` VALUES(30, 6, 1, '2018-11-27 17:35:14', '::1');
+INSERT INTO `download` VALUES(31, 6, 1, '2018-11-27 17:35:26', '::1');
+INSERT INTO `download` VALUES(32, 6, 1, '2018-11-27 17:36:08', '::1');
+INSERT INTO `download` VALUES(33, 6, 1, '2018-11-27 17:36:09', '::1');
+INSERT INTO `download` VALUES(34, 6, 1, '2018-11-27 17:36:55', '::1');
+INSERT INTO `download` VALUES(35, 6, 1, '2018-11-27 17:36:55', '::1');
+INSERT INTO `download` VALUES(36, 6, 1, '2018-11-27 17:45:13', '::1');
+INSERT INTO `download` VALUES(37, 6, 1, '2018-11-27 17:46:26', '::1');
+INSERT INTO `download` VALUES(38, 6, 1, '2018-11-27 17:47:14', '::1');
+INSERT INTO `download` VALUES(39, 6, 1, '2018-11-27 17:47:25', '::1');
+INSERT INTO `download` VALUES(40, 6, 1, '2018-11-27 17:49:02', '::1');
+INSERT INTO `download` VALUES(41, 6, 1, '2018-11-27 17:49:03', '::1');
+INSERT INTO `download` VALUES(42, 6, 1, '2018-11-27 17:49:18', '::1');
+INSERT INTO `download` VALUES(43, 6, 1, '2018-11-27 17:50:45', '::1');
+INSERT INTO `download` VALUES(44, 6, 1, '2018-11-27 17:51:05', '::1');
+INSERT INTO `download` VALUES(45, 6, 1, '2018-11-27 17:51:23', '::1');
+INSERT INTO `download` VALUES(46, 6, 1, '2018-11-27 17:51:35', '::1');
+INSERT INTO `download` VALUES(47, 6, 1, '2018-11-27 17:54:08', '::1');
+INSERT INTO `download` VALUES(48, 6, 1, '2018-11-27 17:54:29', '::1');
+INSERT INTO `download` VALUES(49, 6, 1, '2018-11-27 17:55:28', '::1');
+INSERT INTO `download` VALUES(50, 6, 1, '2018-11-27 17:56:13', '::1');
+INSERT INTO `download` VALUES(51, 6, 1, '2018-11-27 17:58:28', '::1');
+INSERT INTO `download` VALUES(52, 6, 1, '2018-11-27 17:58:29', '::1');
+INSERT INTO `download` VALUES(53, 6, 1, '2018-11-27 17:58:29', '::1');
+INSERT INTO `download` VALUES(54, 6, 1, '2018-11-27 17:58:30', '::1');
+INSERT INTO `download` VALUES(55, 6, 1, '2018-11-27 17:59:11', '::1');
+INSERT INTO `download` VALUES(56, 6, 1, '2018-11-27 17:59:28', '::1');
+INSERT INTO `download` VALUES(57, 6, 1, '2018-11-27 18:00:12', '::1');
+INSERT INTO `download` VALUES(58, 6, 1, '2018-11-27 18:00:14', '::1');
+INSERT INTO `download` VALUES(59, 6, 1, '2018-11-27 18:00:35', '::1');
+INSERT INTO `download` VALUES(60, 6, 1, '2018-11-27 18:00:36', '::1');
+INSERT INTO `download` VALUES(61, 6, 1, '2018-11-27 18:00:36', '::1');
+INSERT INTO `download` VALUES(62, 6, 1, '2018-11-27 18:00:55', '::1');
+INSERT INTO `download` VALUES(63, 6, 1, '2018-11-27 18:00:56', '::1');
+INSERT INTO `download` VALUES(64, 1, 1, '2018-11-27 18:01:56', '::1');
+INSERT INTO `download` VALUES(65, 1, 1, '2018-11-27 18:02:25', '::1');
+INSERT INTO `download` VALUES(66, 1, 1, '2018-11-27 18:03:31', '::1');
+INSERT INTO `download` VALUES(67, 1, 1, '2018-11-27 18:05:37', '::1');
+INSERT INTO `download` VALUES(68, 1, 1, '2018-11-27 18:05:38', '::1');
+INSERT INTO `download` VALUES(69, 1, 1, '2018-11-27 18:05:45', '::1');
+INSERT INTO `download` VALUES(70, 1, 1, '2018-11-27 18:06:05', '::1');
+INSERT INTO `download` VALUES(71, 1, 1, '2018-11-27 18:06:06', '::1');
+INSERT INTO `download` VALUES(72, 1, 1, '2018-11-27 18:06:06', '::1');
+INSERT INTO `download` VALUES(73, 1, 1, '2018-11-27 18:06:06', '::1');
+INSERT INTO `download` VALUES(74, 1, 1, '2018-11-27 18:06:06', '::1');
+INSERT INTO `download` VALUES(75, 1, 1, '2018-11-27 18:06:07', '::1');
+INSERT INTO `download` VALUES(76, 1, 1, '2018-11-27 18:06:07', '::1');
+INSERT INTO `download` VALUES(77, 1, 1, '2018-11-27 18:06:07', '::1');
+INSERT INTO `download` VALUES(78, 1, 1, '2018-11-27 18:07:37', '::1');
+INSERT INTO `download` VALUES(79, 1, 1, '2018-11-27 18:07:38', '::1');
+INSERT INTO `download` VALUES(80, 1, 1, '2018-11-27 18:07:38', '::1');
+INSERT INTO `download` VALUES(81, 1, 1, '2018-11-27 18:07:39', '::1');
+INSERT INTO `download` VALUES(82, 1, 1, '2018-11-27 18:07:39', '::1');
+INSERT INTO `download` VALUES(83, 1, 1, '2018-11-27 18:08:23', '::1');
+INSERT INTO `download` VALUES(84, 1, 1, '2018-11-27 18:09:21', '::1');
+INSERT INTO `download` VALUES(85, 1, 1, '2018-11-27 18:09:22', '::1');
+INSERT INTO `download` VALUES(86, 1, 1, '2018-11-27 18:09:22', '::1');
+INSERT INTO `download` VALUES(87, 1, 1, '2018-11-27 18:09:22', '::1');
+INSERT INTO `download` VALUES(88, 1, 1, '2018-11-27 18:09:27', '::1');
+INSERT INTO `download` VALUES(89, 1, 1, '2018-11-27 18:10:45', '::1');
+INSERT INTO `download` VALUES(93, 6, 1, '2018-11-27 18:11:22', '::1');
+INSERT INTO `download` VALUES(96, 6, 1, '2018-11-27 18:12:39', '::1');
+INSERT INTO `download` VALUES(97, 6, 1, '2018-11-27 18:13:03', '::1');
+INSERT INTO `download` VALUES(100, 6, 1, '2018-11-27 18:14:28', '::1');
+INSERT INTO `download` VALUES(101, 6, 1, '2018-11-27 18:14:52', '::1');
+INSERT INTO `download` VALUES(102, 6, 1, '2018-11-27 18:15:49', '::1');
+INSERT INTO `download` VALUES(103, 6, 1, '2018-11-27 18:17:45', '::1');
+INSERT INTO `download` VALUES(104, 6, 1, '2018-11-27 18:17:46', '::1');
+INSERT INTO `download` VALUES(105, 6, 1, '2018-11-27 18:17:46', '::1');
+INSERT INTO `download` VALUES(106, 6, 1, '2018-11-27 18:17:46', '::1');
+INSERT INTO `download` VALUES(108, 6, 1, '2018-11-27 18:18:03', '::1');
+INSERT INTO `download` VALUES(109, 6, 1, '2018-11-27 18:18:58', '::1');
+INSERT INTO `download` VALUES(110, 6, 1, '2018-11-27 18:18:59', '::1');
+INSERT INTO `download` VALUES(111, 6, 1, '2018-11-27 18:18:59', '::1');
+INSERT INTO `download` VALUES(112, 6, 1, '2018-11-27 18:18:59', '::1');
+INSERT INTO `download` VALUES(113, 6, 1, '2018-11-27 18:18:59', '::1');
+INSERT INTO `download` VALUES(114, 6, 2, '2018-11-27 18:19:04', '::1');
+INSERT INTO `download` VALUES(115, 6, 2, '2018-11-27 18:19:06', '::1');
+INSERT INTO `download` VALUES(116, 6, 2, '2018-11-27 18:19:06', '::1');
+INSERT INTO `download` VALUES(117, 6, 2, '2018-11-27 18:19:06', '::1');
+INSERT INTO `download` VALUES(118, 6, 2, '2018-11-27 18:19:06', '::1');
+INSERT INTO `download` VALUES(119, 6, 2, '2018-11-27 18:19:06', '::1');
+INSERT INTO `download` VALUES(120, 6, 2, '2018-11-27 18:19:06', '::1');
+INSERT INTO `download` VALUES(121, 6, 2, '2018-11-27 18:19:07', '::1');
+INSERT INTO `download` VALUES(122, 6, 2, '2018-11-27 18:20:05', '::1');
+INSERT INTO `download` VALUES(123, 6, 2, '2018-11-27 18:20:06', '::1');
+INSERT INTO `download` VALUES(124, 6, 2, '2018-11-27 18:20:06', '::1');
+INSERT INTO `download` VALUES(125, 6, 2, '2018-11-27 18:20:06', '::1');
+INSERT INTO `download` VALUES(126, 6, 2, '2018-11-27 18:20:06', '::1');
+INSERT INTO `download` VALUES(127, 6, 2, '2018-11-27 18:20:06', '::1');
+INSERT INTO `download` VALUES(128, 6, 2, '2018-11-27 18:20:07', '::1');
+INSERT INTO `download` VALUES(129, 6, 2, '2018-11-27 18:20:07', '::1');
+INSERT INTO `download` VALUES(130, 6, 2, '2018-11-27 18:20:13', '::1');
+INSERT INTO `download` VALUES(131, 6, 2, '2018-11-27 18:20:51', '::1');
+INSERT INTO `download` VALUES(132, 6, 2, '2018-11-27 18:20:52', '::1');
+INSERT INTO `download` VALUES(133, 6, 2, '2018-11-27 18:20:52', '::1');
+INSERT INTO `download` VALUES(134, 6, 2, '2018-11-27 18:20:52', '::1');
+INSERT INTO `download` VALUES(135, 6, 2, '2018-11-27 18:21:00', '::1');
+INSERT INTO `download` VALUES(136, 6, 2, '2018-11-27 18:21:00', '::1');
+INSERT INTO `download` VALUES(137, 6, 2, '2018-11-27 18:21:01', '::1');
+INSERT INTO `download` VALUES(138, 6, 2, '2018-11-27 18:21:23', '::1');
+INSERT INTO `download` VALUES(139, 6, 2, '2018-11-27 18:21:30', '::1');
+INSERT INTO `download` VALUES(140, 6, 2, '2018-11-27 18:21:31', '::1');
+INSERT INTO `download` VALUES(141, 6, 2, '2018-11-27 18:22:34', '::1');
+INSERT INTO `download` VALUES(142, 6, 2, '2018-11-27 18:22:35', '::1');
+INSERT INTO `download` VALUES(143, 6, 2, '2018-11-27 18:22:36', '::1');
+INSERT INTO `download` VALUES(144, 6, 2, '2018-11-27 18:22:36', '::1');
+INSERT INTO `download` VALUES(145, 6, 2, '2018-11-27 18:22:36', '::1');
+INSERT INTO `download` VALUES(146, 6, 2, '2018-11-27 18:22:36', '::1');
+INSERT INTO `download` VALUES(147, 6, 2, '2018-11-27 18:22:37', '::1');
+INSERT INTO `download` VALUES(148, 6, 2, '2018-11-27 18:22:37', '::1');
+INSERT INTO `download` VALUES(149, 6, 2, '2018-11-27 18:23:03', '::1');
+INSERT INTO `download` VALUES(150, 6, 2, '2018-11-27 18:23:03', '::1');
+INSERT INTO `download` VALUES(151, 6, 2, '2018-11-27 18:23:03', '::1');
+INSERT INTO `download` VALUES(152, 6, 2, '2018-11-27 18:23:04', '::1');
+INSERT INTO `download` VALUES(153, 6, 2, '2018-11-27 18:23:04', '::1');
+INSERT INTO `download` VALUES(154, 6, 2, '2018-11-27 18:23:10', '::1');
+INSERT INTO `download` VALUES(155, 6, 2, '2018-11-27 18:23:32', '::1');
+INSERT INTO `download` VALUES(156, 6, 2, '2018-11-27 18:23:33', '::1');
+INSERT INTO `download` VALUES(157, 6, 2, '2018-11-27 18:23:33', '::1');
+INSERT INTO `download` VALUES(158, 6, 2, '2018-11-27 18:23:33', '::1');
+INSERT INTO `download` VALUES(159, 6, 2, '2018-11-27 18:23:33', '::1');
+INSERT INTO `download` VALUES(160, 6, 2, '2018-11-27 18:23:48', '::1');
+INSERT INTO `download` VALUES(161, 6, 2, '2018-11-27 18:23:54', '::1');
+INSERT INTO `download` VALUES(162, 6, 2, '2018-11-27 18:23:55', '::1');
+INSERT INTO `download` VALUES(163, 6, 2, '2018-11-27 18:23:55', '::1');
+INSERT INTO `download` VALUES(164, 6, 2, '2018-11-27 18:23:55', '::1');
+INSERT INTO `download` VALUES(165, 6, 2, '2018-11-27 18:23:56', '::1');
+INSERT INTO `download` VALUES(166, 6, 2, '2018-11-27 18:23:56', '::1');
+INSERT INTO `download` VALUES(167, 6, 2, '2018-11-27 18:23:56', '::1');
+INSERT INTO `download` VALUES(168, 6, 1, '2018-11-27 18:23:59', '::1');
+INSERT INTO `download` VALUES(169, 6, 1, '2018-11-27 18:24:09', '::1');
+INSERT INTO `download` VALUES(170, 6, 1, '2018-11-27 18:24:10', '::1');
+INSERT INTO `download` VALUES(171, 6, 1, '2018-11-27 18:24:10', '::1');
+INSERT INTO `download` VALUES(172, 6, 1, '2018-11-27 18:24:10', '::1');
+INSERT INTO `download` VALUES(173, 6, 1, '2018-11-27 18:24:15', '::1');
+INSERT INTO `download` VALUES(175, 6, 1, '2018-11-27 18:24:24', '::1');
+INSERT INTO `download` VALUES(176, 6, 1, '2018-11-27 18:24:56', '::1');
+INSERT INTO `download` VALUES(177, 6, 1, '2018-11-27 18:24:57', '::1');
+INSERT INTO `download` VALUES(178, 6, 1, '2018-11-27 18:24:57', '::1');
+INSERT INTO `download` VALUES(179, 6, 1, '2018-11-27 18:24:57', '::1');
+INSERT INTO `download` VALUES(180, 6, 1, '2018-11-27 18:24:58', '::1');
+INSERT INTO `download` VALUES(181, 6, 1, '2018-11-27 18:24:58', '::1');
+INSERT INTO `download` VALUES(183, 6, 1, '2018-11-27 18:25:44', '::1');
+INSERT INTO `download` VALUES(184, 6, 1, '2018-11-27 18:26:40', '::1');
+INSERT INTO `download` VALUES(185, 6, 1, '2018-11-27 18:27:00', '::1');
+INSERT INTO `download` VALUES(186, 6, 1, '2018-11-27 18:27:02', '::1');
+INSERT INTO `download` VALUES(187, 6, 1, '2018-11-27 18:27:17', '::1');
+INSERT INTO `download` VALUES(188, 6, 2, '2018-11-27 18:27:28', '::1');
+INSERT INTO `download` VALUES(189, 6, 2, '2018-11-27 18:27:42', '::1');
+INSERT INTO `download` VALUES(190, 6, 2, '2018-11-27 18:28:38', '::1');
+INSERT INTO `download` VALUES(191, 6, 1, '2018-11-27 18:37:55', '::1');
+INSERT INTO `download` VALUES(192, 7, 5, '2018-11-27 19:00:43', '::1');
+INSERT INTO `download` VALUES(193, 7, 5, '2018-11-27 19:00:54', '::1');
+INSERT INTO `download` VALUES(195, 1, 1, '2018-11-28 02:32:53', '::1');
+INSERT INTO `download` VALUES(196, 6, 1, '2018-11-28 02:33:27', '::1');
+INSERT INTO `download` VALUES(197, 6, 1, '2018-11-28 02:33:32', '::1');
+INSERT INTO `download` VALUES(198, 6, 1, '2018-12-03 12:26:47', '::1');
+INSERT INTO `download` VALUES(199, 6, 1, '2018-12-03 12:27:20', '::1');
+INSERT INTO `download` VALUES(200, 2, 30, '2019-01-16 04:00:41', '127.0.0.1');
+INSERT INTO `download` VALUES(201, 2, 30, '2019-01-16 04:00:49', '127.0.0.1');
+INSERT INTO `download` VALUES(202, 2, 30, '2019-01-16 04:07:22', '127.0.0.1');
+INSERT INTO `download` VALUES(203, 2, 30, '2019-01-16 04:12:38', '127.0.0.1');
+INSERT INTO `download` VALUES(204, 2, 30, '2019-01-16 04:17:49', '127.0.0.1');
+INSERT INTO `download` VALUES(205, 2, 30, '2019-01-16 04:18:03', '127.0.0.1');
+INSERT INTO `download` VALUES(206, 1, 30, '2019-01-16 04:40:50', '127.0.0.1');
+INSERT INTO `download` VALUES(207, 1, 8, '2019-01-16 04:41:04', '127.0.0.1');
+INSERT INTO `download` VALUES(208, 1, 29, '2019-01-16 06:16:12', '127.0.0.1');
+INSERT INTO `download` VALUES(209, 1, 29, '2019-01-16 06:16:17', '127.0.0.1');
+INSERT INTO `download` VALUES(210, 1, 10, '2019-01-16 06:17:02', '127.0.0.1');
+INSERT INTO `download` VALUES(211, 1, 30, '2019-01-16 06:17:20', '127.0.0.1');
 
-INSERT INTO `file` (`id`, `course_id`, `user_id`, `title`, `description`, `size`, `time`, `type`, `filename`, `lecture_file`) VALUES
-(1, 4, 5, 'PDF 1', 'Jakis opis', 123, '2018-11-02 00:00:00', 'PDF', 'plik.pdf', ''),
-(2, 5, 2, 'Podstawy teleinfy wykłady', 'It is possible to use multiple engines at the same time using the DelegatingEngine class. This class takes a list of engines and acts just like a normal templating engine. The only difference is that it delegates the calls to one of the other engines.', 44353, '2018-11-04 00:00:00', 'PDF', 'plik.pdf', ''),
-(5, 9, 7, 'Drugi plik', 'Opis', 342, '2018-11-06 00:00:00', 'PDF', 'plik.pdf', ''),
-(7, 9, 2, NULL, NULL, 1647, '2019-01-06 22:01:43', 'PDF', 'W3_techniki_projektowania_testow.pdf', '8e200a2d46305c4398e612b9bd35520a.pdf'),
-(8, 4, 2, 'Tyytuł', 'Opiśik', 1966, '2019-01-06 23:38:58', 'PDF', 'ZJO PODSTAWY.pdf', '0869545b56afa678ae07475d4a3f52af.pdf'),
-(10, 5, 2, 'asd', '234', 79, '2019-01-07 00:40:13', 'PDF', 'plik3.pdf', 'd521ee04822455c12763d253bcf807f6.pdf');
+INSERT INTO `file` VALUES(1, 4, 5, 'PDF 1', 'Jakis opis', 123, '2018-11-02 00:00:00', 'PDF', 'plik.pdf', '');
+INSERT INTO `file` VALUES(2, 5, 2, 'Podstawy teleinfy wykłady', 'It is possible to use multiple engines at the same time using the DelegatingEngine class. This class takes a list of engines and acts just like a normal templating engine. The only difference is that it delegates the calls to one of the other engines.', 44353, '2018-11-04 00:00:00', 'PDF', 'plik.pdf', '');
+INSERT INTO `file` VALUES(5, 9, 7, 'Drugi plik', 'Opis', 342, '2018-11-06 00:00:00', 'PDF', 'plik.pdf', '');
+INSERT INTO `file` VALUES(8, 4, 2, 'Tyytuł', 'Opiśik', 1966, '2019-01-06 23:38:58', 'PDF', 'ZJO PODSTAWY.pdf', '0869545b56afa678ae07475d4a3f52af.pdf');
+INSERT INTO `file` VALUES(10, 5, 2, 'asd', '234', 79, '2019-01-07 00:40:13', 'PDF', 'plik3.pdf', 'd521ee04822455c12763d253bcf807f6.pdf');
+INSERT INTO `file` VALUES(27, 1, 2, 'PSIAI-A-LAB03-SPECYFIKACJA-WYMAGAN', NULL, 362, '2019-01-09 23:07:39', 'pdf', 'PSIAI-A-LAB03-SPECYFIKACJA-WYMAGAN.pdf', '34d2acc6dcee66ab5a658c45c0e505d4.pdf');
+INSERT INTO `file` VALUES(29, 1, 2, 'PSIAI-A-LAB01-Jędrzejczak-Krzysztof', NULL, 784, '2019-01-15 23:59:54', 'pdf', 'PSIAI-A-LAB01-Jędrzejczak-Krzysztof.pdf', '7dfedd16e4bb864da93b946b9384a7c7.pdf');
+INSERT INTO `file` VALUES(30, 1, 2, 'Leader--LBO-516--datasheet--ID5687', NULL, 212, '2019-01-16 00:21:02', 'pdf', 'Leader--LBO-516--datasheet--ID5687.pdf', '4adde127557887267891731a9d1f8ad9.pdf');
 
-INSERT INTO `privilege` (`id`, `user_id`, `file_id`, `clearanceLevel`) VALUES
-(1, 6, 1, 0),
-(3, 6, 5, 0),
-(5, 6, 2, 0),
-(6, 7, 5, 0),
-(7, 2, 2, 1),
-(10, 2, 1, 1);
+INSERT INTO `privilege` VALUES(1, 6, 1, 0);
+INSERT INTO `privilege` VALUES(3, 6, 5, 1);
+INSERT INTO `privilege` VALUES(5, 6, 2, 0);
+INSERT INTO `privilege` VALUES(6, 7, 5, 0);
+INSERT INTO `privilege` VALUES(7, 2, 2, 1);
+INSERT INTO `privilege` VALUES(10, 2, 1, 1);
+INSERT INTO `privilege` VALUES(12, 11, 1, 0);
+INSERT INTO `privilege` VALUES(15, 5, 2, 0);
+INSERT INTO `privilege` VALUES(16, 9, 2, 0);
+INSERT INTO `privilege` VALUES(17, 6, 27, 0);
+INSERT INTO `privilege` VALUES(18, 2, 27, 0);
+INSERT INTO `privilege` VALUES(19, 1, 27, 0);
+INSERT INTO `privilege` VALUES(51, 1, 29, 0);
+INSERT INTO `privilege` VALUES(52, 3, 29, 0);
+INSERT INTO `privilege` VALUES(53, 5, 29, 0);
+INSERT INTO `privilege` VALUES(54, 6, 30, 0);
+INSERT INTO `privilege` VALUES(55, 11, 30, 0);
+INSERT INTO `privilege` VALUES(56, 2, 30, 0);
+INSERT INTO `privilege` VALUES(57, 9, 1, 0);
 
-INSERT INTO `user` (`id`, `transcriptId`, `password`, `lastActivity`, `roles`) VALUES
-(1, 1, '$2y$12$padDy436UIu4dY/tCW/38.f/.qzzrdUxyGy5DcF.Ti8.V4zU38qTy', '2018-12-04 19:43:56', 'a:1:{i:0;s:10:\"ROLE_ADMIN\";}'),
-(2, 122, '$2y$12$padDy436UIu4dY/tCW/38.f/.qzzrdUxyGy5DcF.Ti8.V4zU38qTy', '2018-11-25 21:23:44', 'a:1:{i:0;s:13:\"ROLE_LECTURER\";}'),
-(3, 120, '$2y$12$padDy436UIu4dY/tCW/38.f/.qzzrdUxyGy5DcF.Ti8.V4zU38qTy', '2018-11-25 21:23:44', 'a:1:{i:0;s:13:\"ROLE_LECTURER\";}'),
-(4, 55555, '$2y$12$padDy436UIu4dY/tCW/38.f/.qzzrdUxyGy5DcF.Ti8.V4zU38qTy', '2018-11-25 21:23:44', 'a:1:{i:0;s:9:\"ROLE_USER\";}'),
-(5, 44444, '$2y$12$padDy436UIu4dY/tCW/38.f/.qzzrdUxyGy5DcF.Ti8.V4zU38qTy', '2018-11-25 21:23:44', 'a:1:{i:0;s:9:\"ROLE_USER\";}'),
-(6, 12345, '$2y$12$padDy436UIu4dY/tCW/38.f/.qzzrdUxyGy5DcF.Ti8.V4zU38qTy', '2018-12-03 12:35:41', 'a:1:{i:0;s:9:\"ROLE_USER\";}'),
-(7, 12344, '$2y$12$padDy436UIu4dY/tCW/38.f/.qzzrdUxyGy5DcF.Ti8.V4zU38qTy', '2018-11-27 19:02:39', 'a:1:{i:0;s:9:\"ROLE_USER\";}'),
-(9, 12347, '$2y$13$qo5.jdPtYgoBGNhyJbGqQ.hYmP2wQ89ntbvfaz.OcbCCkKMUVW4Fe', '2019-01-03 03:02:34', 'a:1:{i:0;s:9:\"ROLE_USER\";}'),
-(10, 34534, '$2y$13$7y3yFUfqZSlGV96fjGIy6.fN0auZINC3wqw6zqHVhmN3wIQJ4wfWq', '2019-01-03 06:30:11', 'a:1:{i:0;s:9:\"ROLE_USER\";}'),
-(11, 12346, '$2y$13$vUSLzFV.0jiV4.HuVZSXlehFNeuhh5/4sn3n0eSmrK/tjnuS.9ju6', '2019-01-03 06:40:08', 'a:1:{i:0;s:9:\"ROLE_USER\";}');
-COMMIT;
+INSERT INTO `user` VALUES(1, 1, '$2y$12$padDy436UIu4dY/tCW/38.f/.qzzrdUxyGy5DcF.Ti8.V4zU38qTy', '2018-12-04 19:43:56', 'a:1:{i:0;s:10:\"ROLE_ADMIN\";}', '4a676f0a66');
+INSERT INTO `user` VALUES(2, 122, '$2y$13$RCrCIPh0Jq4vBpeLD5nIK.en416Al2fsCs.4O..w8zdlsoCTVZwLq', '2019-01-16 00:38:48', 'a:1:{i:0;s:13:\"ROLE_LECTURER\";}', '492c296e0d');
+INSERT INTO `user` VALUES(3, 120, '$2y$12$padDy436UIu4dY/tCW/38.f/.qzzrdUxyGy5DcF.Ti8.V4zU38qTy', '2018-11-25 21:23:44', 'a:1:{i:0;s:13:\"ROLE_LECTURER\";}', '');
+INSERT INTO `user` VALUES(4, 55555, '$2y$12$padDy436UIu4dY/tCW/38.f/.qzzrdUxyGy5DcF.Ti8.V4zU38qTy', '2018-11-25 21:23:44', 'a:1:{i:0;s:9:\"ROLE_USER\";}', '');
+INSERT INTO `user` VALUES(5, 44444, '$2y$12$padDy436UIu4dY/tCW/38.f/.qzzrdUxyGy5DcF.Ti8.V4zU38qTy', '2018-11-25 21:23:44', 'a:1:{i:0;s:9:\"ROLE_USER\";}', '');
+INSERT INTO `user` VALUES(6, 12345, '$2y$12$padDy436UIu4dY/tCW/38.f/.qzzrdUxyGy5DcF.Ti8.V4zU38qTy', '2018-12-03 12:35:41', 'a:1:{i:0;s:9:\"ROLE_USER\";}', '');
+INSERT INTO `user` VALUES(7, 12344, '$2y$12$padDy436UIu4dY/tCW/38.f/.qzzrdUxyGy5DcF.Ti8.V4zU38qTy', '2018-11-27 19:02:39', 'a:1:{i:0;s:9:\"ROLE_USER\";}', '');
+INSERT INTO `user` VALUES(9, 12347, '$2y$13$qo5.jdPtYgoBGNhyJbGqQ.hYmP2wQ89ntbvfaz.OcbCCkKMUVW4Fe', '2019-01-03 03:02:34', 'a:1:{i:0;s:9:\"ROLE_USER\";}', '');
+INSERT INTO `user` VALUES(11, 12346, '$2y$13$vUSLzFV.0jiV4.HuVZSXlehFNeuhh5/4sn3n0eSmrK/tjnuS.9ju6', '2019-01-03 06:40:08', 'a:1:{i:0;s:9:\"ROLE_USER\";}', '');
+SET FOREIGN_KEY_CHECKS=1;
