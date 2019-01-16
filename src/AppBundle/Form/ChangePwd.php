@@ -32,8 +32,8 @@ class ChangePwd extends AbstractType
                 'first_options'  => array('attr' => array('placeholder' => 'Twoje nowe hasło', 'maxlength' => 255), 'label' => false),
                 'second_options' => array('attr' => array('placeholder' => 'Powtórz nowe hasło'), 'label' => false),
             ))
-            ->add('Zmien haslo', SubmitType::class, array(
-                'attr' => array('class' => 'btn btn-primary'),
+            ->add('submit', SubmitType::class, array( 'label' => 'Zmień hasło',
+                'attr' => array('class' => 'btn btn-primary m-0'),
             ));
     }/**
      * {@inheritdoc}

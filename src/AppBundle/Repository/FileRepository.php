@@ -30,12 +30,12 @@ class FileRepository extends \Doctrine\ORM\EntityRepository
         $qb = $request->createQueryBuilder('F');
         if ($this->isAdmin) {
             $query = $qb
-                ->select('F.title, F.description, F.size, F.time, F.type, F.filename, F.lectureFile, C.name')
+                ->select('F.id, F.title, F.description, F.size, F.time, F.type, F.filename, F.lectureFile, C.name')
                 ->join('AppBundle:Course', 'C', 'WITH', 'F.course = C')
                 ->getQuery();
         } else {
             $query = $qb
-                ->select('F.title, F.description, F.size, F.time, F.type, F.filename, F.lectureFile, C.name')
+                ->select('F.id, F.title, F.description, F.size, F.time, F.type, F.filename, F.lectureFile, C.name')
                 ->join('AppBundle:Privilege', 'P', 'WITH', 'P.file = F')
                 ->join('AppBundle:Course', 'C', 'WITH', 'F.course = C')
                 ->where('P.user = :userId')
@@ -93,14 +93,14 @@ class FileRepository extends \Doctrine\ORM\EntityRepository
         $qb = $request->createQueryBuilder('F');
         if ($this->isAdmin) {
             $query = $qb
-                ->select('F.title, F.description, F.size, F.time, F.type, F.filename, F.lectureFile, C.name')
+                ->select('F.id, F.title, F.description, F.size, F.time, F.type, F.filename, F.lectureFile, C.name')
                 ->join('AppBundle:Course', 'C', 'WITH', 'F.course = C')
                 ->where('C.name = :course')
                 ->setParameter('course', $course)
                 ->getQuery();
         } else {
             $query = $qb
-                ->select('F.title, F.description, F.size, F.time, F.type, F.filename, F.lectureFile, C.name')
+                ->select('F.id, F.title, F.description, F.size, F.time, F.type, F.filename, F.lectureFile, C.name')
                 ->join('AppBundle:Privilege', 'P', 'WITH', 'P.file = F')
                 ->join('AppBundle:Course', 'C', 'WITH', 'F.course = C')
                 ->where('P.user = :userId')

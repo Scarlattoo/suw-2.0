@@ -23,7 +23,10 @@
     <div>
         <h2>Panel użytkownika</h2>
         Zalogowany jako: {{ app.user }}
-        
+        <hr>
+        <h4>Hasło do wykładów:</h4>
+        <h5>{{ LecturesPassword }}</h5>
+        <a class="btn btn-warning btn-sm m-0" href="{{ path('userPanel_generate_new_pwd') }}" >Wygeneruj nowe</a>
         <hr>
         <h5>Zmiana hasła</h5>
 
@@ -31,7 +34,7 @@
             <div class="form-group">{{ form_row(form.password) }}</div>
             <div class="form-group">{{ form_row(form.plainPassword.first) }}</div>
             <div class="form-group">{{ form_row(form.plainPassword.second) }}</div>
-        {{ form_end(form) }} 
+        {{ form_end(form) }}
 
     </div> 
 {% endblock %}

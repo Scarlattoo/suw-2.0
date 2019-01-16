@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Users list</h1>
+
+    <table class="table table-sm table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nr indeksu</th>
+                <th>Data rejestracji</th>
+                <th>Rola</th>
+                <th>Akcje</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td><a href="{{ path('admin_users_index', { 'id': user.id }) }}">{{ user.id }}</a></td>
+                <td>{{ user.transcriptId }}</td>
+                <td>{% if user.lastActivity %}{{ user.lastActivity|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if user.roles %}{{ user.roles|join(', ') }}{% endif %}</td>
+                <td>
+                            <a class="btn btn-sm btn-primary m-1" href="{{ path('admin_users_show', { 'id': user.id }) }}">podgląd</a>
+                            <a class="btn btn-sm btn-primary m-1" href="{{ path('admin_users_edit', { 'id': user.id }) }}">edycja</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+            <a class="btn btn-primary ml-0" href="{{ path('register') }}">Dodaj użytkownika</a>
+    <a class="btn btn-primary ml-0" href="{{ path('admin_index') }}">Powrót do panelu administratora</a>
+{% endblock %}

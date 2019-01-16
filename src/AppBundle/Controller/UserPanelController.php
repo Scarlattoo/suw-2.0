@@ -2,12 +2,10 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Form\ChangePwd;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 class UserPanelController extends Controller
 {
@@ -16,10 +14,9 @@ class UserPanelController extends Controller
      */
     public function userAction(Request $request)
     {
-
         $user = $this->getUser();
+        $LecturesPassword = $user->getLecturesPassword();
         $oldPassword = $user->getPassword();
-
         $form = $this->createForm(ChangePwd::class, $user);
         $form->handleRequest($request);
 
@@ -47,6 +44,22 @@ class UserPanelController extends Controller
    
          return $this->render('userPanel/user.html.twig', array(
              'form' => $form->createView(),
+             'LecturesPassword' => $LecturesPassword,
          ));      
+    }
+    /**
+     * @Route("/panel_uzytkownika/generuj_nowe_haslo", name="userPanel_generate_new_pwd")
+     */
+    public function generateAction(Request $request)
+    {
+
+        $user = $this->getUser();
+        $lecturesPassword = \substr(\md5(\uniqid()),0,10);
+        $user->setLecturesPassword($lecturesPassword);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($user);
+        $entityManager->flush();
+        $this->addFlash('success','Wygenerowano nowe hasło do plików wykładów.');
+        return $this->redirectToRoute('userPanel');
     }
 }

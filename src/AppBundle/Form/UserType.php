@@ -34,7 +34,7 @@ class UserType extends AbstractType
                 'first_options'  => array('attr' => array('placeholder' => 'Twoje hasło', 'maxlength' => 255), 'label' => false),
                 'second_options' => array('attr' => array('placeholder' => 'Powtórz hasło'), 'label' => false),
             ))
-            ->add('Wyślij', SubmitType::class, array(
+            ->add('submit', SubmitType::class, array('label' => 'Wyślij',
                 'attr' => array('class' => 'btn btn-primary'),
             ));
     }/**

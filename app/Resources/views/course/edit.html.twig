@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Course edit</h1>
+{{ form_start(edit_form) }}
+    {{ form_widget(edit_form) }}
+    <a class="btn btn-primary mt-0 ml-0" href="{{ path('admin_courses_index') }}">Powrót do listy</a>
+    <input class="btn btn-success mt-0 ml-0" type="submit" value="Zapisz zmiany"/>
+    {{ form_end(edit_form) }}
+
+{% endblock %}

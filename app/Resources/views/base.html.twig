@@ -42,7 +42,7 @@
                   style="display:inline">PANEL UŻYTKOWNIKA</span> </a>
 
         <a class="nav-link{% if app.request.attributes.get("_route") == 'admin' %} mobile-active{% endif %}"
-           href='{{ url('admin') }}'
+           href='{{ url('admin_index') }}'
            style="{% if is_granted('ROLE_ADMIN') %}display:block{% else %}display:none{% endif %}">
             PANEL ADMINISTRATORA</a>
         {% if app.user %}
@@ -93,13 +93,9 @@
                    style="{% if is_granted('ROLE_USER') %}display:block{% else %}display:none{% endif %}">
                     PANEL UŻYTKOWNIKA</a>
                 <a class="nav-link list-group-item list-group-item-action{% if app.request.attributes.get("_route") == 'admin' %} active{% endif %}"
-                   href='{{ url('admin') }}'
+                   href='{{ url('admin_index') }}'
                    style="{% if is_granted('ROLE_ADMIN') %}display:block{% else %}display:none{% endif %}">
                     PANEL ADMINISTRATORA</a>
-                <a class="nav-link list-group-item list-group-item-action{% if app.request.attributes.get("_route") == 'watermTest'  %} active{% endif %}"
-                   href='{{ url('watermTest') }}'
-                   style="{% if is_granted('ROLE_USER') %}display:block{% else %}display:none{% endif %}">
-                    TEST WATERMARK</a>
             </div>
             <div class="statistics">
                 {% block statistics %}

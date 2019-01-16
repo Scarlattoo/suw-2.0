@@ -6,6 +6,7 @@ use AppBundle\Form\UserType;
 use AppBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
@@ -32,6 +33,7 @@ class RegistrationController extends Controller
                 ->encodePassword($user, $user->getPlainPassword());
             $user->setPassword($password);
             $user->setLastActivity(new \DateTime());
+            $user->setLecturesPassword(\substr(\md5(\uniqid()),0,10));
             $user->setRoles(array('ROLE_USER'));
 
             // 4) save the User!

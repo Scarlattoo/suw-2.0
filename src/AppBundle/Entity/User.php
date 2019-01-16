@@ -60,7 +60,16 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(name="password", type="string", length=100)
      */
     private $password;
-    
+
+
+    /**
+     * @var string
+     * @ORM\Column(name="lectures_password", type="string", length=100)
+     * @Assert\Length(max=100, maxMessage="Hasło zbyt długie", min="7", minMessage="Hasło powinno mieć przynajmniej 7 znaków")
+     * @Assert\NotBlank(message="Hasło nie może być puste")
+     */
+    private $LecturesPassword;
+
     /**
      * @var \DateTime
      *
@@ -176,6 +185,24 @@ class User implements UserInterface, \Serializable
     {
         return $this->password;
     }
+
+    /**
+     * @return string
+     */
+    public function getLecturesPassword()
+    {
+        return $this->LecturesPassword;
+    }
+
+    /**
+     * @param string $Lecturespassword
+     */
+    public function setLecturesPassword($LecturesPassword)
+    {
+        $this->LecturesPassword = $LecturesPassword;
+    }
+
+
 
     /**
      * Set lastActivity

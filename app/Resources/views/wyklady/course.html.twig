@@ -27,8 +27,8 @@
                 <td>{{ file.time|date("d.m.Y H:i:s") }}</td>
                 <td>{{ file.type }}</td>
                 <td>{{ file.filename }}</td>
-                <td class="text-center"><a href="#" title="Wyświetl plik"><i class="far fa-eye fa-1x"></i></a>
-                    <a href="#" title="Pobierz plik" download><i class="fa fa-file-download fa-1x"></i></a></td>
+                <td class="text-center"><a href="{{ url('show_lecture', {'lecture': file.id}) }}" title="Wyświetl plik"><i class="far fa-eye fa-1x"></i></a>
+                    <a href="{{ url('download_lecture', {'lecture': file.id}) }}" title="Pobierz plik" download><i class="fa fa-file-download fa-1x"></i></a></td>
             </tr>
         {% endfor %}
         </tbody>

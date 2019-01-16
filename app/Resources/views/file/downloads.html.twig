@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h2>Lista pobrań wykładów dla pliku:</h2>
+        <h4>"{{ file.title }}" ({{ file.filename }})</h4>
+    <div class="col-lg-6">
+    <table class="table table-sm table-striped text-center">
+        <thead>
+        <tr class="bg-primary text-white">
+            <th scope="col">#</th>
+            <th scope="col">Numer indeksu użytkownika</th>
+            <th scope="col">Czas pobrania</th>
+            <th scope="col">Ip pobrania</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for download in downloads %}
+            <tr>
+                <td scope="row">{{ loop.index }}</td>
+                <td scope="row">{{ download.user.transcriptId }}</td>
+                <td scope="row">{{ download.time|date('d-m-y H:i:s') }}</td>
+                <td scope="row">{{ download.ip }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+    <a class="btn btn-primary mt-0 ml-0" href="{{ path('file_show', { 'id': file.id }) }}">Powrót do podglądu</a>
+    <a class="btn btn-primary mt-0 ml-0" href="{{ path('file_index') }}">Powrót do listy</a>
+{% endblock %}

@@ -35,7 +35,8 @@
             </tr>
         </tbody>
     </table>
-            <a class="btn btn-primary mt-0 ml-0" href="{{ path('file_index') }}">Powrót</a>
+            <a class="btn btn-primary mt-0 ml-0" href="{{ path('file_index') }}">Powrót do listy</a>
             <a class="btn btn-success mt-0 ml-0" href="{{ path('file_edit', { 'id': file.id }) }}">Edytuj</a>
             <a class="btn btn-warning mt-0 ml-0" href="{{ path('file_privilege', { 'fileId': file.id }) }}">Udostępnij studentom</a>
+            <a class="btn btn-info mt-0 ml-0" href="{{ path('file_downloads', { 'fileId': file.id }) }}">Pokaż historie pobrań</a>
 {% endblock %}
